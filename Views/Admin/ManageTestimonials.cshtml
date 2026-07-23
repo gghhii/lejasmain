@@ -1,0 +1,67 @@
+@model IEnumerable<DrAshrafMellouli.Models.Testimonial>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Gestion des Avis";
+}
+
+<div class="admin-header">
+    <h1 class="admin-title">Témoignages & Avis</h1>
+    <a asp-action="CreateTestimonial" class="btn-luxury">Nouvel Avis</a>
+</div>
+
+<div class="admin-card">
+    <table class="table-lux">
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Procédure</th>
+                <th>Note</th>
+                <th>Mise en avant</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 35px; height: 35px; background: var(--admin-accent); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">
+                                @item.Initials
+                            </div>
+                            <span style="font-weight: 600;">@item.Name</span>
+                        </div>
+                    </td>
+                    <td style="color: var(--admin-text-muted);">@item.Procedure</td>
+                    <td style="color: #FFD700;">
+                        @for(int i=0; i<item.Rating; i++) { <span>★</span> }
+                    </td>
+                    <td>
+                        @if(item.IsFeatured)
+                        {
+                            <span style="color: #2ecc71; font-size: 0.8rem; background: rgba(46, 204, 113, 0.1); padding: 4px 8px; border-radius: 20px;">OUI</span>
+                        }
+                        else
+                        {
+                            <span style="opacity: 0.3; font-size: 0.8rem;">NON</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="EditTestimonial" asp-route-id="@item.Id" class="action-link">Modifier</a>
+                        <form asp-action="DeleteTestimonial" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Supprimer cet avis ?');">
+                            <button type="submit" class="delete-btn">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 50px; color: var(--admin-text-muted)">
+                         Aucun avis patient trouvé.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

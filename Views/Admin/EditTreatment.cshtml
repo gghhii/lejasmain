@@ -1,0 +1,123 @@
+@model DrAshrafMellouli.Models.Treatment
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Modifier le Traitement";
+}
+
+<div class="admin-header">
+    <h1 class="admin-title">@ViewData["Title"]</h1>
+    <a asp-action="Treatments" class="action-link">← Retour à la liste</a>
+</div>
+
+<div class="admin-card" style="max-width: 800px;">
+    <form asp-action="EditTreatment" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ImageUrl" />
+
+        <div class="form-group">
+            <label asp-for="Title" class="form-label">Titre du Traitement</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" style="color: #ff4d4d; font-size: 0.8rem;"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Category" class="form-label">Catégorie</label>
+            <select asp-for="Category" class="form-control" asp-items="Html.GetEnumSelectList<DrAshrafMellouli.Models.Category>()"></select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description" class="form-label">Description Courte</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" style="color: #ff4d4d; font-size: 0.8rem;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Image du Traitement</label>
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <div class="current-image-box">
+                    <img src="@Model.ImageUrl" alt="Image actuelle" />
+                    <span class="current-image-label">Image actuelle</span>
+                </div>
+            }
+            <div class="file-upload-zone" id="uploadZone">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--admin-accent); margin-bottom: 10px;">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <p class="upload-label">@(string.IsNullOrEmpty(Model.ImageUrl) ? "Uploader une image" : "Changer l'image") — <span class="upload-browse">Parcourir</span></p>
+                <p class="upload-hint">JPG, PNG, GIF, WEBP</p>
+                <input type="file" name="imageFile" id="imageFile" accept="image/*" class="file-input-hidden" />
+            </div>
+            <div id="imagePreview" class="image-preview-box" style="display:none;">
+                <img id="previewImg" src="" alt="Aperçu" />
+                <button type="button" class="remove-image-btn" onclick="removeImage()">✕ Annuler</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ProtocolDetails" class="form-label">Détails du Protocole (Optionnel)</label>
+            <textarea asp-for="ProtocolDetails" class="form-control"></textarea>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <button type="submit" class="btn-luxury">Enregistrer les modifications</button>
+        </div>
+    </form>
+</div>
+
+<style>
+.file-upload-zone {
+    border: 2px dashed rgba(197, 160, 89, 0.4); border-radius: 10px;
+    padding: 30px; text-align: center; cursor: pointer; transition: all 0.3s ease;
+    position: relative; margin-top: 12px;
+}
+.file-upload-zone:hover, .file-upload-zone.drag-over {
+    border-color: var(--admin-accent); background: rgba(197, 160, 89, 0.05);
+}
+.upload-label { margin: 0 0 6px; font-size: 0.9rem; }
+.upload-browse { color: var(--admin-accent); font-weight: 600; }
+.upload-hint { color: var(--admin-text-muted); font-size: 0.78rem; margin: 0; }
+.file-input-hidden { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.current-image-box { margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+.current-image-box img { height: 80px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); }
+.current-image-label { color: var(--admin-text-muted); font-size: 0.8rem; }
+.image-preview-box { margin-top: 12px; position: relative; display: inline-block; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+.image-preview-box img { max-height: 200px; max-width: 100%; display: block; }
+.remove-image-btn { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.7); color: #ff4d4d; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+</style>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        const zone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('imageFile');
+        const preview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+
+        fileInput.addEventListener('change', function () {
+            if (this.files && this.files[0]) showPreview(this.files[0]);
+        });
+        zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+        zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+        zone.addEventListener('drop', e => {
+            e.preventDefault(); zone.classList.remove('drag-over');
+            if (e.dataTransfer.files[0]) { fileInput.files = e.dataTransfer.files; showPreview(e.dataTransfer.files[0]); }
+        });
+
+        function showPreview(file) {
+            const reader = new FileReader();
+            reader.onload = e => { previewImg.src = e.target.result; };
+            reader.readAsDataURL(file);
+            zone.style.display = 'none';
+            preview.style.display = 'block';
+        }
+        function removeImage() {
+            fileInput.value = '';
+            previewImg.src = '';
+            zone.style.display = 'block';
+            preview.style.display = 'none';
+        }
+    </script>
+}

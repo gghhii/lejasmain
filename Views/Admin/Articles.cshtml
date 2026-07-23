@@ -1,0 +1,53 @@
+@model IEnumerable<DrAshrafMellouli.Models.Article>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Gestion du Journal";
+}
+
+<div class="admin-header">
+    <h1 class="admin-title">Articles du Journal</h1>
+    <a asp-action="CreateArticle" class="btn-luxury">Nouvel Article</a>
+</div>
+
+<div class="admin-card">
+    <table class="table-lux">
+        <thead>
+            <tr>
+                <th>Couverture</th>
+                <th>Date</th>
+                <th>Titre</th>
+                <th>Extrait</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@item.CoverImageUrl" style="width: 60px; height: 40px; object-fit: cover; border-radius: 4px;" onerror="this.src='/images/article-placeholder.jpg'" />
+                    </td>
+                    <td style="color: var(--admin-text-muted); font-size: 0.85rem;">@item.DatePublished.ToString("dd/MM/yyyy")</td>
+                    <td style="font-weight: 600;">@item.Title</td>
+                    <td style="color: var(--admin-text-muted); font-size: 0.85rem; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        @item.Description
+                    </td>
+                    <td>
+                        <a asp-action="EditArticle" asp-route-id="@item.Id" class="action-link">Modifier</a>
+                        <form asp-action="DeleteArticle" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Supprimer cet article ?');">
+                            <button type="submit" class="delete-btn">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 50px; color: var(--admin-text-muted)">
+                        Aucun article trouvé.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

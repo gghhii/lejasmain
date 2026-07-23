@@ -1,0 +1,151 @@
+@model DrAshrafMellouli.Models.Result
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Modifier le Résultat";
+}
+
+<div class="admin-header">
+    <h1 class="admin-title">@ViewData["Title"]</h1>
+    <a asp-action="Results" class="action-link">← Retour à la liste</a>
+</div>
+
+<div class="admin-card" style="max-width: 800px;">
+    <form asp-action="EditResult" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="BeforeImageUrl" />
+        <input type="hidden" asp-for="AfterImageUrl" />
+
+        <div class="form-group">
+            <label asp-for="CaseNumber" class="form-label">Numéro de Cas (ex: #H-440)</label>
+            <input asp-for="CaseNumber" class="form-control" />
+            <span asp-validation-for="CaseNumber" style="color: #ff4d4d;"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Category" class="form-label">Catégorie</label>
+            <select asp-for="Category" class="form-control" asp-items="Html.GetEnumSelectList<DrAshrafMellouli.Models.Category>()"></select>
+            <span asp-validation-for="Category" style="color: #ff4d4d;"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Title" class="form-label">Titre du Résultat</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" style="color: #ff4d4d;"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description" class="form-label">Description Courte</label>
+            <textarea asp-for="Description" class="form-control" rows="2"></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+            <!-- Before Image -->
+            <div class="form-group">
+                <label class="form-label">Image Avant</label>
+                @if (!string.IsNullOrEmpty(Model.BeforeImageUrl))
+                {
+                    <div class="current-image-box">
+                        <img src="@Model.BeforeImageUrl" alt="Avant actuel" />
+                        <span class="current-image-label">Actuelle</span>
+                    </div>
+                }
+                <div class="file-upload-zone" id="beforeZone">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--admin-accent);margin-bottom:8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <p class="upload-label"><span class="upload-browse">@(string.IsNullOrEmpty(Model.BeforeImageUrl) ? "Choisir" : "Changer")</span></p>
+                    <p class="upload-hint">JPG, PNG, WEBP</p>
+                    <input type="file" name="beforeImageFile" id="beforeImageFile" accept="image/*" class="file-input-hidden" />
+                </div>
+                <div id="beforePreview" class="image-preview-box" style="display:none;">
+                    <img id="beforePreviewImg" src="" alt="Avant" />
+                    <button type="button" class="remove-image-btn" onclick="removeImage('before')">✕</button>
+                </div>
+            </div>
+
+            <!-- After Image -->
+            <div class="form-group">
+                <label class="form-label">Image Après</label>
+                @if (!string.IsNullOrEmpty(Model.AfterImageUrl))
+                {
+                    <div class="current-image-box">
+                        <img src="@Model.AfterImageUrl" alt="Après actuel" />
+                        <span class="current-image-label">Actuelle</span>
+                    </div>
+                }
+                <div class="file-upload-zone" id="afterZone">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--admin-accent);margin-bottom:8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <p class="upload-label"><span class="upload-browse">@(string.IsNullOrEmpty(Model.AfterImageUrl) ? "Choisir" : "Changer")</span></p>
+                    <p class="upload-hint">JPG, PNG, WEBP</p>
+                    <input type="file" name="afterImageFile" id="afterImageFile" accept="image/*" class="file-input-hidden" />
+                </div>
+                <div id="afterPreview" class="image-preview-box" style="display:none;">
+                    <img id="afterPreviewImg" src="" alt="Après" />
+                    <button type="button" class="remove-image-btn" onclick="removeImage('after')">✕</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ProtocolName" class="form-label">Protocole Utilisé</label>
+            <input asp-for="ProtocolName" class="form-control" />
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+                <label asp-for="Sessions" class="form-label">Nombre de Sessions</label>
+                <input asp-for="Sessions" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ResultType" class="form-label">Type de Résultat</label>
+                <input asp-for="ResultType" class="form-control" />
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <button type="submit" class="btn-luxury">Enregistrer les modifications</button>
+        </div>
+    </form>
+</div>
+
+<style>
+.file-upload-zone { border: 2px dashed rgba(197,160,89,0.4); border-radius: 10px; padding: 20px 15px; text-align: center; cursor: pointer; transition: all 0.3s; position: relative; margin-top: 8px; }
+.file-upload-zone:hover { border-color: var(--admin-accent); background: rgba(197,160,89,0.05); }
+.upload-label { margin: 0 0 4px; font-size: 0.85rem; }
+.upload-browse { color: var(--admin-accent); font-weight: 600; }
+.upload-hint { color: var(--admin-text-muted); font-size: 0.75rem; margin: 0; }
+.file-input-hidden { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.current-image-box { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.current-image-box img { height: 65px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); }
+.current-image-label { color: var(--admin-text-muted); font-size: 0.78rem; }
+.image-preview-box { margin-top: 8px; position: relative; display: inline-block; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); width: 100%; }
+.image-preview-box img { width: 100%; max-height: 160px; object-fit: cover; display: block; }
+.remove-image-btn { position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,0.7); color: #ff4d4d; border: none; padding: 4px 9px; border-radius: 5px; cursor: pointer; }
+</style>
+
+@section Scripts {
+    <script>
+        function setupUpload(inputId, zoneId, previewId, previewImgId) {
+            const input = document.getElementById(inputId);
+            const zone = document.getElementById(zoneId);
+            const preview = document.getElementById(previewId);
+            const img = document.getElementById(previewImgId);
+            input.addEventListener('change', () => { if (input.files[0]) show(input.files[0]); });
+            zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = 'var(--admin-accent)'; });
+            zone.addEventListener('dragleave', () => zone.style.borderColor = '');
+            zone.addEventListener('drop', e => { e.preventDefault(); if (e.dataTransfer.files[0]) { input.files = e.dataTransfer.files; show(e.dataTransfer.files[0]); } });
+            function show(file) {
+                const reader = new FileReader();
+                reader.onload = e => { img.src = e.target.result; };
+                reader.readAsDataURL(file);
+                zone.style.display = 'none';
+                preview.style.display = 'block';
+            }
+        }
+        function removeImage(side) {
+            document.getElementById(side + 'ImageFile').value = '';
+            document.getElementById(side + 'Zone').style.display = 'block';
+            document.getElementById(side + 'Preview').style.display = 'none';
+        }
+        setupUpload('beforeImageFile', 'beforeZone', 'beforePreview', 'beforePreviewImg');
+        setupUpload('afterImageFile', 'afterZone', 'afterPreview', 'afterPreviewImg');
+    </script>
+}

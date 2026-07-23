@@ -1,0 +1,21 @@
+# Build & Binary outputs
+bin/
+obj/
+out/
+
+# User & IDE specific files
+.vs/
+.vscode/
+.idea/
+*.user
+*.userosscache
+*.sln.docstates
+
+# Database & log files
+*.db-shm
+*.db-wal
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db

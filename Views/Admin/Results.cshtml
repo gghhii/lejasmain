@@ -1,0 +1,54 @@
+@model IEnumerable<DrAshrafMellouli.Models.Result>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Gestion des Résultats";
+}
+
+<div class="admin-header">
+    <h1 class="admin-title">Résultats Cliniques</h1>
+    <a asp-action="CreateResult" class="btn-luxury">Nouveau Résultat</a>
+</div>
+
+<div class="admin-card">
+    <table class="table-lux">
+        <thead>
+            <tr>
+                <th>Visuels</th>
+                <th>Cas #</th>
+                <th>Titre</th>
+                <th>Protocole</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <div style="display: flex; gap: 4px;">
+                            <img src="@item.BeforeImageUrl" style="width: 40px; height: 40px; object-fit: cover; border-radius: 2px;" title="Avant" />
+                            <img src="@item.AfterImageUrl" style="width: 40px; height: 40px; object-fit: cover; border-radius: 2px;" title="Après" />
+                        </div>
+                    </td>
+                    <td style="color: var(--admin-accent); font-weight: 700;">@item.CaseNumber</td>
+                    <td style="font-weight: 600;">@item.Title</td>
+                    <td style="color: var(--admin-text-muted);">@item.ProtocolName</td>
+                    <td>
+                        <a asp-action="EditResult" asp-route-id="@item.Id" class="action-link">Modifier</a>
+                        <form asp-action="DeleteResult" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Supprimer ce résultat ?');">
+                            <button type="submit" class="delete-btn">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 50px; color: var(--admin-text-muted)">
+                        Aucun résultat trouvé.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

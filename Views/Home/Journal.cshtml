@@ -1,0 +1,295 @@
+@model IEnumerable<DrAshrafMellouli.Models.Article>
+@{
+    ViewData["Title"] = "Journal & Publications - Les Jasmins";
+}
+
+<!-- ATMOSPHERIC JOURNEY NAVIGATION: FLOATING GLASS PILL -->
+<div class="journey-glass-nav" id="journeyNav">
+    <a href="#hero" class="journey-link active" data-section="hero">JOURNAL</a>
+    <a href="#articles" class="journey-link" data-section="articles">PUBLICATIONS</a>
+</div>
+
+<section id="hero" class="cinematic-journal-hero">
+    <div class="hero-parallax-bg" style="background-image: url('/images/clinical_symmetry_hero.png');"></div>
+    <div class="hero-vignette-ultra"></div>
+    <div class="hero-noise-layer"></div>
+    <div class="hero-scanner-line"></div>
+    
+    <div class="hero-container reveal-on-scroll">
+        <div class="editorial-badge">LE JOURNAL SCIENTIFIQUE</div>
+        <h1 class="journal-main-title">
+            LA SCIENCE DE <br>
+            <span class="title-italic-accent">L'ÉLÉGANCE</span>
+        </h1>
+        <p class="journal-lead-text">
+            Explorez nos dernières réflexions, innovations technologiques et études de cas cliniques. 
+            Une immersion au cœur de la dermatologie esthétique d'exception.
+        </p>
+    </div>
+    
+    <div class="hero-scroll-monolith">
+        <div class="monolith-line"></div>
+        <span class="monolith-text">DÉCOUVRIR LES ÉDITOS</span>
+    </div>
+</section>
+
+<section id="articles" class="journal-listing-section">
+    <div class="listing-container">
+        @if (Model != null && Model.Any())
+        {
+            <div class="journal-flex-grid">
+                @foreach (var art in Model)
+                {
+                    <article class="journal-card reveal-on-scroll" onclick="location.href='/Home/Article/@art.Id'" style="cursor: pointer;">
+                        <div class="journal-card__visual">
+                            <img src="@art.CoverImageUrl" alt="@art.Title" class="journal-card__img">
+                            <div class="card-scanner-effect"></div>
+                            <div class="card-category-tag">@art.CategoryName</div>
+                        </div>
+                        <div class="journal-card__content">
+                            <div class="card-meta">
+                                <span class="card-date">@art.DatePublished.ToString("MMMM yyyy", new System.Globalization.CultureInfo("fr-FR")).ToUpper()</span>
+                            </div>
+                            <h2 class="card-title">@art.Title</h2>
+                            <p class="card-excerpt">@art.Description</p>
+                            <a href="/Home/Article/@art.Id" class="card-cta-btn">
+                                <span>LIRE L'ÉDITO ENTIER</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-journal-state reveal-on-scroll">
+                <div class="empty-ornament"></div>
+                <h3>DÉBUT DU VOYAGE ÉDITORIAL</h3>
+                <p>Nos premiers articles sont en cours de rédaction. Dr Ashraaf Mellouli Laroussi partagera bientôt ses expertises ici.</p>
+                <a href="/" class="luxury-pill-btn">RETOURNER À L'ACCUEIL</a>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="artistic-cta reveal-on-scroll">
+    <div class="cta-inner">
+        <span class="cta-eyebrow">EXCELLENCE SIGNATURE</span>
+        <div class="cta-ornament"></div>
+        <h2 class="cta-title">VOTRE MÉTAMORPHOSE <br> SIGNATURE</h2>
+        <p class="cta-subtitle">Commencez votre parcours vers l'harmonie esthétique par une consultation clinique personnalisée.</p>
+        <a asp-controller="Home" asp-action="Contact" class="luxury-pill-btn">PRENDRE RENDEZ-VOUS</a>
+    </div>
+</section>
+
+<style>
+/* JOURNAL SPECIFIC STYLES */
+.cinematic-journal-hero {
+    height: 80vh;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-parallax-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(1) contrast(1.1) brightness(0.4);
+    transition: transform 0.1s linear;
+}
+
+.hero-vignette-ultra {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.9) 100%);
+}
+
+.hero-noise-layer {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.journal-main-title {
+    font-family: var(--font-serif);
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    line-height: 0.95;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.editorial-badge {
+    color: var(--color-gold);
+    letter-spacing: 0.5em;
+    font-size: 0.7rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.journal-lead-text {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+}
+
+.journal-listing-section {
+    padding: 10rem 5%;
+    background: #0a0a0a;
+}
+
+.listing-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.journal-flex-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 60px;
+}
+
+.journal-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition-smooth);
+}
+
+.journal-card:hover {
+    transform: translateY(-15px);
+    border-color: rgba(198, 168, 124, 0.3);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.journal-card__visual {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+}
+
+.journal-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.2) contrast(1.1);
+    transition: transform 1.5s var(--ease-aesthetic);
+}
+
+.journal-card:hover .journal-card__img {
+    transform: scale(1.1);
+}
+
+.card-category-tag {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    color: var(--color-gold);
+    padding: 8px 15px;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.journal-card__content {
+    padding: 3rem;
+}
+
+.card-meta {
+    margin-bottom: 1rem;
+}
+
+.card-date {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.card-title {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    transition: color 0.4s;
+}
+
+.journal-card:hover .card-title {
+    color: var(--color-gold);
+}
+
+.card-excerpt {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-cta-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.card-cta-btn:hover {
+    color: var(--color-gold);
+    gap: 25px;
+}
+
+.empty-journal-state {
+    text-align: center;
+    padding: 10rem 0;
+}
+
+.empty-ornament {
+    width: 60px;
+    height: 1px;
+    background: var(--color-gold);
+    margin: 0 auto 3rem;
+}
+
+@@media (max-width: 768px) {
+    .journal-flex-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const parallaxBg = document.querySelector('.hero-parallax-bg');
+            if (parallaxBg) {
+                parallaxBg.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    });
+</script>

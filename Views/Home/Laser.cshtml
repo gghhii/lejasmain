@@ -1,0 +1,422 @@
+@model IEnumerable<DrAshrafMellouli.Models.Treatment>
+@{
+    ViewData["Title"] = "Laser & Haute Technologie - Les Jasmins";
+}
+<!-- ATMOSPHERIC JOURNEY NAVIGATION: FLOATING GLASS PILL -->
+<div class="journey-glass-nav" id="journeyNav">
+    <a href="#hero" class="journey-link active" data-section="hero">ACCUEIL</a>
+    <a href="#protocols" class="journey-link" data-section="protocols">TRAITEMENTS</a>
+    <a href="#expertise" class="journey-link" data-section="expertise">TECHNOLOGIES</a>
+    <a href="#results" class="journey-link" data-section="results">RÉSULTATS</a>
+    <a href="#journey" class="journey-link" data-section="journey">DÉROULEMENT</a>
+    <a href="#faq" class="journey-link" data-section="faq">FAQ</a>
+</div>
+
+<section id="hero" class="treatment-clinical-split">
+    <div class="clinical-split-sculpture">
+        <!-- Left Side: Technical Data -->
+        <div class="clinical-data-column reveal-on-scroll">
+            <div class="data-badge">PROTOCOLE : LASER</div>
+            <div class="data-readout">
+                <span>COORD : 98.441</span>
+                <span>TYPE : PHOTONIQUE</span>
+                <span>v4.0.2</span>
+            </div>
+            <h1 class="clinical-title">
+                PRÉCISION <br>
+                <span class="gold-italic">PHOTONIQUE</span>
+            </h1>
+            <p class="clinical-lead">
+                Exploiter la puissance des ondes lumineuses pour traiter la pigmentation, les cicatrices et les poils indésirables avec une précision de qualité chirurgicale.
+            </p>
+            
+            <div class="clinical-abstract-mesh"></div>
+        </div>
+
+        <!-- Right Side: Ethereal Portrait -->
+        <div class="clinical-visual-column">
+            <img class="clinical-portrait-img" src="/images/laser.png" alt="Laser Treatment">
+            <div class="visual-scan-line"></div>
+            <div class="visual-topo-overlay"></div>
+            <div class="visual-corner-tags">
+                <span>LONGUEUR D'ONDE</span>
+                <span>QUANTUM</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="clinical-scroll-indicator">
+        <span class="scroll-label">PROTOCOLES SÉLECTIONNÉS</span>
+        <div class="scroll-monolith-line"></div>
+    </div>
+</section>
+
+
+<section id="protocols" class="treatment-gallery-sculpture section-padding">
+    <div class="gallery-container">
+        <header class="gallery-header reveal-on-scroll">
+            <h2 class="gallery-title">TRAITEMENTS <br> <em>LASER</em></h2>
+            <div class="gallery-line"></div>
+        </header>
+
+        <div class="treatment-discovery-bar reveal-on-scroll">
+            <div class="search-wrapper">
+                <input type="text" class="search-input" placeholder="RECHERCHER UN SOIN..." id="laserSearch">
+                <div class="search-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <div class="search-scanner-line"></div>
+            </div>
+        </div>
+
+        <div class="treatment-matrix">
+            @if (Model != null && Model.Any())
+            {
+                int i = 1;
+                foreach (var item in Model)
+                {
+                    <div class="matrix-item reveal-on-scroll" style="transition-delay: @(0.1 * (i-1))s;">
+                        <div class="matrix-visual">
+                            <img src="@item.ImageUrl" alt="@item.Title">
+                            <div class="matrix-overlay"></div>
+                            <span class="matrix-num">@i.ToString("D2")</span>
+                        </div>
+                        <div class="matrix-content">
+                            <h3 class="matrix-name">@item.Title</h3>
+                            <p class="matrix-desc">@item.Description</p>
+                                <a href="/Home/Treatment/@item.Id" class="matrix-link">PROTOCOL DETAILS</a>
+                        </div>
+                    </div>
+                    i++;
+                }
+            }
+            else
+            {
+                <!-- Fallback to static if no data in DB yet -->
+                <!-- 1: Le rajeunissement au laser -->
+                <div class="matrix-item reveal-on-scroll">
+                    <div class="matrix-visual">
+                        <img src="/images/medical_laser.png" alt="Rajeunissement">
+                        <div class="matrix-overlay"></div>
+                        <span class="matrix-num">01</span>
+                    </div>
+                    <div class="matrix-content">
+                        <h3 class="matrix-name">LE RAJEUNISSEMENT AU LASER</h3>
+                        <p class="matrix-desc">Protocoles avancés pour restaurer l'éclat et la fermeté cutanée.</p>
+                        <a href="#" class="matrix-link">DÉTAILS DU PROTOCOLE</a>
+                    </div>
+                </div>
+
+                <!-- 2: Traitement des taches brunes -->
+                <div class="matrix-item reveal-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="matrix-visual">
+                        <img src="https://images.unsplash.com/photo-1512290902202-069f78a0d42b?q=80&w=2070&auto=format&fit=crop" alt="Taches">
+                        <div class="matrix-overlay"></div>
+                        <span class="matrix-num">02</span>
+                    </div>
+                    <div class="matrix-content">
+                        <h3 class="matrix-name">TRAITEMENT DES TACHES BRUNES (LASER Q-SWITCHED / LAMPES FLASH)</h3>
+                        <p class="matrix-desc">Élimination précise des hyperpigmentations et taches solaires.</p>
+                        <a href="#" class="matrix-link">DÉTAILS DU PROTOCOLE</a>
+                    </div>
+                </div>
+
+                <!-- 3: Traitement des rougeurs -->
+                <div class="matrix-item reveal-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="matrix-visual">
+                        <img src="https://images.unsplash.com/photo-1519415510236-8559b198b82e?q=80&w=2070&auto=format&fit=crop" alt="Rougeurs">
+                        <div class="matrix-overlay"></div>
+                        <span class="matrix-num">03</span>
+                    </div>
+                    <div class="matrix-content">
+                        <h3 class="matrix-name">TRAITEMENT DES ROUGEURS (ÉRYTHROSE / COUPEROSE) AU LASER</h3>
+                        <p class="matrix-desc">Prise en charge des pathologies vasculaires du visage.</p>
+                        <a href="#" class="matrix-link">DÉTAILS DU PROTOCOLE</a>
+                    </div>
+                </div>
+
+                <!-- 4: IPL -->
+                <div class="matrix-item reveal-on-scroll" style="transition-delay: 0.3s;">
+                    <div class="matrix-visual">
+                        <img src="https://images.unsplash.com/photo-1552693673-1bf958298935?q=80&w=2073&auto=format&fit=crop" alt="IPL">
+                        <div class="matrix-overlay"></div>
+                        <span class="matrix-num">04</span>
+                    </div>
+                    <div class="matrix-content">
+                        <h3 class="matrix-name">PHOTORÉJUVÉNATION LUMIÈRE INTENSE PULSÉE (IPL)</h3>
+                        <p class="matrix-desc">Lumière haute intensité pour unifier le teint et la texture.</p>
+                        <a href="#" class="matrix-link">DÉTAILS DU PROTOCOLE</a>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+        <div id="noLaserResults" class="no-results-msg">Aucun soin ne correspond à votre recherche.</div>
+
+        <script>
+            document.getElementById('laserSearch').addEventListener('input', function(e) {
+                const term = e.target.value.toLowerCase();
+                const items = document.querySelectorAll('.matrix-item');
+                let hasResults = false;
+                
+                items.forEach(item => {
+                    const title = item.querySelector('.matrix-name').textContent.toLowerCase();
+                    const desc = item.querySelector('.matrix-desc').textContent.toLowerCase();
+                    
+                    if (title.includes(term) || desc.includes(term)) {
+                        item.classList.remove('hidden');
+                        hasResults = true;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+                
+                document.getElementById('noLaserResults').style.display = hasResults ? 'none' : 'block';
+            });
+        </script>
+    </div>
+</section>
+
+</section>
+
+<section id="expertise" class="tech-metrics-section">
+    <div class="gallery-container">
+        <header class="gallery-header reveal-on-scroll">
+            <h2 class="gallery-title">TECHNOLOGIES <br> <em>& APPAREILS</em></h2>
+            <div class="gallery-line"></div>
+        </header>
+
+        <div class="metrics-grid">
+            <div class="metric-card reveal-on-scroll">
+                <span class="metric-num">MESURE 01</span>
+                <h3 class="metric-title">DOUBLE LONGUEUR D'ONDE</h3>
+                <p class="metric-desc">Nous utilisons les lasers Alex (755 nm) et YAG (1064 nm), nous permettant de traiter tous les types de peau (Fitzpatrick I-VI) avec une sécurité maximale.</p>
+            </div>
+            <div class="metric-card reveal-on-scroll" style="transition-delay: 0.1s;">
+                <span class="metric-num">MESURE 02</span>
+                <h3 class="metric-title">RÉPARATION FRACTIONNÉE</h3>
+                <p class="metric-desc">Nos lasers fractionnés CO2 créent des zones micro-thermiques pour un surfaçage cutané profond tout en accélérant la réponse cicatricielle.</p>
+            </div>
+            <div class="metric-card reveal-on-scroll" style="transition-delay: 0.2s;">
+                <span class="metric-num">MESURE 03</span>
+                <h3 class="metric-title">TECH CHILL-PROTECT</h3>
+                <p class="metric-desc">Le refroidissement épidermique intégré assure le confort et protège la surface de la peau pendant l'administration photonique à haute énergie.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+</section>
+
+<section id="results" class="transformation-showcase section-padding">
+    <div class="showcase-container">
+        <header class="showcase-header reveal-on-scroll">
+            <span class="showcase-label">ÉTUDE DE CAS: #L-105</span>
+            <h2 class="showcase-title">RADIANCE & <br> <em>CLARTÉ PHOTONIQUE</em></h2>
+        </header>
+
+        <div class="cinematic-reveal reveal-on-scroll">
+            <div class="reveal-split">
+                <img src="/images/hydrafacial_before.png" alt="Laser Before">
+                <img src="/images/hydrafacial_after.png" alt="Laser After">
+            </div>
+            <div class="reveal-labels">
+                <span class="reveal-label">AVANT</span>
+                <span class="reveal-label">APRÈS</span>
+            </div>
+        </div>
+
+        <div class="showcase-footer reveal-on-scroll">
+            <div class="footer-metadata">
+                <span class="metadata-item">PROTOCOLE: <span>LASER CO2 FRACTIONNÉ</span></span>
+                <span class="metadata-item">RÉCUPÉRATION: <span>48 HEURES</span></span>
+                <span class="metadata-item">TEXTURE: <span>95% AMÉLIORATION</span></span>
+            </div>
+            <a href="/Home/Results" class="showcase-cta">VOIR TOUTES LES MÉTAMORPHOSES →</a>
+        </div>
+    </div>
+</section>
+
+</section>
+
+<section id="journey" class="procedure-journey">
+    <div class="journey-container">
+        <header class="gallery-header reveal-on-scroll">
+            <h2 class="gallery-title">DÉROULEMENT <br> <em>DU SOIN</em></h2>
+            <div class="gallery-line"></div>
+        </header>
+
+        <div class="journey-steps">
+            <div class="journey-step reveal-on-scroll">
+                <div class="step-line"></div>
+                <div class="step-dot"></div>
+                <span class="step-label">PHASE 01</span>
+                <h3 class="step-title">TYPAGE CUTANÉ</h3>
+                <p class="step-text">Évaluation scientifique des niveaux de mélanine et de la sensibilité cutanée pour calibrer les paramètres du laser.</p>
+            </div>
+            <div class="journey-step reveal-on-scroll" style="transition-delay: 0.1s;">
+                <div class="step-line"></div>
+                <div class="step-dot"></div>
+                <span class="step-label">PHASE 02</span>
+                <h3 class="step-title">CALIBRATION</h3>
+                <p class="step-text">Réglage précis de l'intensité de la longueur d'onde et de la durée d'impulsion pour votre cible dermatologique spécifique.</p>
+            </div>
+            <div class="journey-step reveal-on-scroll" style="transition-delay: 0.2s;">
+                <div class="step-line"></div>
+                <div class="step-dot"></div>
+                <span class="step-label">PHASE 03</span>
+                <h3 class="step-title">APPLICATION</h3>
+                <p class="step-text">Administration contrôlée de faisceaux lumineux, surveillée en temps réel par le Dr Mellouli pour une précision absolue.</p>
+            </div>
+            <div class="journey-step reveal-on-scroll" style="transition-delay: 0.3s;">
+                <div class="step-line"></div>
+                <div class="step-dot"></div>
+                <span class="step-label">PHASE 04</span>
+                <h3 class="step-title">PROTECTION</h3>
+                <p class="step-text">Apaisement post-laser et protocoles de protection UV stricts pour garantir l'intégrité de vos résultats.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+</section>
+
+<section id="faq" class="faq-clinical">
+    <div class="faq-container">
+        <header class="gallery-header reveal-on-scroll">
+            <h2 class="gallery-title">QUESTIONS <br> <em>FRÉQUENTES</em></h2>
+            <div class="gallery-line"></div>
+        </header>
+
+        <div class="faq-list">
+            <div class="faq-item reveal-on-scroll">
+                <button class="faq-question">
+                    <span class="faq-q-text">L'épilation au laser fait-elle mal ?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-a-content">
+                        La plupart des patients ressentent une sensation similaire à un "claquement d'élastique". Nos systèmes de refroidissement avancés réduisent considérablement l'inconfort et, pour les zones sensibles, une crème anesthésiante peut être appliquée.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item reveal-on-scroll">
+                <button class="faq-question">
+                    <span class="faq-q-text">De combien de séances ai-je besoin pour les cicatrices ou la pigmentation ?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-a-content">
+                        Selon la profondeur de la cible, 3 à 5 séances sont généralement nécessaires pour un surfaçage important. Certaines pigmentations peuvent être élimimées en seulement 1 ou 2 séances.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item reveal-on-scroll">
+                <button class="faq-question">
+                    <span class="faq-q-text">Puis-je suivre un traitement au laser en été ?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-a-content">
+                        Oui, à condition de respecter strictement la protection UV et d'éviter l'exposition directe au soleil pendant 2 semaines avant et après. Nous pouvons ajuster les réglages ou les technologies pendant la saison à UV élevés pour plus de sécurité.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="artistic-cta reveal-on-scroll">
+    <div class="cta-inner">
+        <span class="cta-eyebrow">THÉRAPIE PHOTONIQUE</span>
+        <div class="cta-ornament"></div>
+        <h2 class="cta-title">TRANSFORMEZ-VOUS PAR <br> LA PUISSANCE DE LA LUMIÈRE</h2>
+        <p class="cta-subtitle">Découvrez la science du rajeunissement par la lumière grâce à notre technologie laser de pointe.</p>
+        <a asp-controller="Home" asp-action="Contact" class="luxury-pill-btn">PRENDRE RENDEZ-VOUS</a>
+    </div>
+</section>
+
+<footer class="lux-footer">
+    <div class="footer-bg-line"></div>
+    <div class="footer-container">
+        <!-- Brand Area -->
+        <div class="footer-left">
+            <div class="footer-brand-wrap">
+                <span class="footer-logo">Les Jasmins</span>
+                <p class="footer-tagline">
+                    L'excellence en dermatologie esthétique au sein du Kantaoui Medical Center. Une vision architecturale de la beauté.
+                </p>
+                <div class="footer-signature">Dir. Dr A. Mellouli Laroussi</div>
+            </div>
+        </div>
+
+        <!-- Links & Info Grid -->
+        <div class="footer-right">
+            <!-- Nav -->
+            <div>
+                <h4 class="footer-col-title">Navigation</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="/#hero">Radiance</a></li>
+                    <li><a href="/#about">Le Dr</a></li>
+                    <li><a href="/#traitements">Collection</a></li>
+                    <li><a href="/#resultats">Résultats</a></li>
+                    <li><a href="/#expertise">Expertise</a></li>
+                    <li><a href="/#journal">Journal</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact/Info -->
+            <div>
+                <h4 class="footer-col-title">Information</h4>
+                <div class="footer-info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <span class="footer-info-label">Lieu</span>
+                        <p class="footer-info-value">Kantaoui Medical Center, Bloc A, 5ème Étage<br>Hammam Sousse, Sousse, Tunisie</p>
+                    </div>
+                </div>
+                <div class="footer-info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <span class="footer-info-label">Contact</span>
+                        <p class="footer-info-value">+216 20 402 049<br>ash.laroussi@yahoo.fr</p>
+                    </div>
+                </div>
+                <div class="footer-info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <span class="footer-info-label">Horaires</span>
+                        <p class="footer-info-value">Lun — Ven : 09:00 - 18:00<br>Sam : 09:00 - 13:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+        <div class="footer-social-links">
+            <a href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                INSTAGRAM
+            </a>
+            <a href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                FACEBOOK
+            </a>
+            <a href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LINKEDIN
+            </a>
+        </div>
+        <span>© 2026 CENTRE LES JASMINS — TOUS DROITS RÉSERVÉS</span>
+        <span style="opacity: 0.5;">DESIGN PAR RADIANCE EDITORIAL</span>
+    </div>
+</footer>

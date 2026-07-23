@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Les Jasmins - Centre de Dermatologie Esthétique & Laser</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- PAGE TRANSITION PRELOADER -->
+    <div class="page-transition-preloader" id="pagePreloader">
+        <div class="preloader-logo">RADIANCE</div>
+        <div class="preloader-line"></div>
+    </div>
+
+    <!-- CUSTOM PRO CURSOR -->
+    <div class="pro-cursor" id="proCursor"></div>
+    <div class="pro-cursor-follower" id="proCursorFollower"></div>
+    <div class="radiant-background-system">
+        <div class="golden-particles"></div>
+        <div class="light-orb orb-gold-primary"></div>
+        <div class="light-orb orb-bronze-soft"></div>
+        <div class="light-orb orb-white-radiance"></div>
+        
+        <!-- Creative Elements -->
+        <div class="lens-flare"></div>
+        <div class="geometric-float" style="top: 15%; left: 10%;"></div>
+        <div class="geometric-float" style="bottom: 20%; right: 15%; animation-delay: -5s;"></div>
+    </div>
+
+
+
+
+
+    
+    <nav class="nav-main">
+        <div class="logo-container">
+            <div class="luxury-motif">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="etherealGold" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#c6a87c"/>
+                            <stop offset="0.5" stop-color="#ffffff"/>
+                            <stop offset="1" stop-color="#8E6E3A"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M42 20 C55 18, 68 25, 68 40 C68 55, 60 58, 55 65 C50 72, 52 85, 52 85 M35 25 C25 35, 25 65, 45 80" 
+                           stroke="url(#etherealGold)" stroke-width="2.5" stroke-linecap="round" />
+                    <circle cx="50" cy="50" r="45" stroke="url(#etherealGold)" stroke-width="0.5" opacity="0.2" />
+                </svg>
+            </div>
+            <a href="/" class="logo-name">
+                <span class="logo-name__dr">LES JASMINS</span>
+                <span class="logo-name__last">CENTRE ESTHÉTIQUE</span>
+            </a>
+        </div>
+
+        <button class="hamburger-menu" id="mobileMenuToggle" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-links">
+            <a asp-controller="Home" asp-action="Index" class="nav-link">ACCUEIL</a>
+            <a asp-controller="Home" asp-action="About" class="nav-link">À PROPOS</a>
+            
+            <div class="nav-dropdown">
+                <a href="#" class="nav-link drop-trigger">TRAITEMENTS <span class="drop-arrow"></span></a>
+                <div class="dropdown-content">
+                    <div class="dropdown-grid">
+                        <a asp-controller="Home" asp-action="Face" class="drop-item">
+                            <span class="drop-item__name">VISAGE</span>
+                            <span class="drop-item__desc">Sculpture & Radiance</span>
+                        </a>
+                        <a asp-controller="Home" asp-action="Hair" class="drop-item">
+                            <span class="drop-item__name">CHEVEUX</span>
+                            <span class="drop-item__desc">Régénération Capillaire</span>
+                        </a>
+                        <a asp-controller="Home" asp-action="Body" class="drop-item">
+                            <span class="drop-item__name">CORPS</span>
+                            <span class="drop-item__desc">Silhouette & Fermeté</span>
+                        </a>
+                        <a asp-controller="Home" asp-action="Laser" class="drop-item">
+                            <span class="drop-item__name">LASER</span>
+                            <span class="drop-item__desc">Haute Technologie</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <a asp-controller="Home" asp-action="Results" class="nav-link">RÉSULTATS</a>
+            <a asp-controller="Home" asp-action="Testimonials" class="nav-link">AVIS</a>
+            <a asp-controller="Home" asp-action="Journal" class="nav-link">JOURNAL</a>
+            <a asp-controller="Home" asp-action="Contact" class="nav-link">CONTACT</a>
+        </div>
+
+        <div class="nav-actions">
+            <div class="nav-social">
+                <a href="#" class="social-icon-link" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="#" class="social-icon-link" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="#" class="social-icon-link" aria-label="TikTok">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+                </a>
+            </div>
+            <a asp-controller="Admin" asp-action="Index" class="nav-link admin-icon-link" title="Admin Panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+            </a>
+            <a asp-controller="Home" asp-action="Contact" class="btn-rdv-modern">PRENDRE RDV</a>
+        </div>
+
+    </nav>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <!-- RADIANT WHATSAPP FLOATING HUB -->
+    <div class="whatsapp-float-container">
+        <div class="whatsapp-pulse"></div>
+        <a href="https://wa.me/21620402049" class="whatsapp-button" target="_blank">
+            <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.1-3.2-5.4-.3-8.3 2.4-11 2.5-2.4 5.5-6.4 8.3-9.6 2.8-3.2 3.7-5.5 5.5-9.1 1.9-3.7 1-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-12.9 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+            <span class="wa-text">WhatsApp</span>
+        </a>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,92 @@
+/* ... previous CSS ... */
+
+/* SCROLL HINT LUXURY */
+.scroll-hint-luxury {
+    margin-top: 4rem;
+    opacity: 0.8;
+    animation: fadeIn 3s ease;
+}
+
+.hint-text {
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    display: block;
+    margin-bottom: 20px;
+}
+
+.hint-line {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, var(--color-gold), transparent);
+    margin: 0 auto;
+    transform-origin: top;
+    animation: lineGrow 2s infinite alternate var(--ease-apple);
+}
+
+@keyframes lineGrow {
+    0% {
+        transform: scaleY(0.5);
+        opacity: 0.2;
+    }
+
+    100% {
+        transform: scaleY(1);
+        opacity: 0.8;
+    }
+}
+
+/* VISION CONTROL (MORPH) */
+.vision-control {
+    position: absolute;
+    bottom: 4rem;
+    right: 5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.vision-control .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    transition: 0.3s;
+}
+
+.toggle-track {
+    width: 50px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-nude);
+    border-radius: 20px;
+    position: relative;
+    transition: 0.4s var(--ease-apple);
+}
+
+.toggle-thumb {
+    width: 16px;
+    height: 16px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    transition: 0.4s var(--ease-apple);
+}
+
+.vision-control.active .toggle-track {
+    background: var(--color-gold);
+}
+
+.vision-control.active .toggle-thumb {
+    left: 28px;
+    background: #fff;
+}
+
+.vision-control.active .label {
+    color: var(--color-gold);
+}

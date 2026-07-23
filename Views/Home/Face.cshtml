@@ -1,0 +1,435 @@
+@model IEnumerable<DrAshrafMellouli.Models.Treatment>
+@{
+    ViewData["Title"] = "Traitement Visage - Les Jasmins";
+}
+<!-- ATMOSPHERIC JOURNEY NAVIGATION: FLOATING GLASS PILL -->
+<div class="journey-glass-nav" id="journeyNav">
+    <a href="#hero" class="journey-link active" data-section="hero">ACCUEIL</a>
+    <a href="#protocols" class="journey-link" data-section="protocols">TRAITEMENTS</a>
+    <a href="#expertise" class="journey-link" data-section="expertise">TECHNOLOGIES</a>
+    <a href="#results" class="journey-link" data-section="results">RÉSULTATS</a>
+    <a href="#journey" class="journey-link" data-section="journey">DÉROULEMENT</a>
+    <a href="#faq" class="journey-link" data-section="faq">FAQ</a>
+</div>
+
+<section id="hero" class="treatment-clinical-split">
+    <div class="clinical-split-sculpture">
+        <!-- Left Side: Technical Data -->
+        <div class="clinical-data-column reveal-on-scroll">
+            <div class="data-badge">PROTOCOLE : VISAGE</div>
+            <div class="data-readout">
+                <span>COORD : 32.846</span>
+                <span>TYPE : STRUCTUREL</span>
+                <span>v1.0.4</span>
+            </div>
+            <h1 class="clinical-title">
+                L'ART DE <br>
+                <span class="gold-italic">L'ALIGNEMENT</span>
+            </h1>
+            <p class="clinical-lead">
+                Restauration de l'harmonie architecturale du visage par la précision clinique et l'intuition esthétique.
+            </p>
+            
+            <div class="clinical-abstract-mesh"></div>
+        </div>
+
+        <!-- Right Side: Ethereal Portrait -->
+        <div class="clinical-visual-column">
+            <img class="clinical-portrait-img" src="/images/face.png" alt="Face Treatment">
+
+            <div class="visual-scan-line"></div>
+            <div class="visual-topo-overlay"></div>
+            <div class="visual-corner-tags">
+                <span>SCULPTURE</span>
+                <span>PRÉCISION</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="clinical-scroll-indicator">
+        <span class="scroll-label">CURATED PROTOCOLS</span>
+        <div class="scroll-monolith-line"></div>
+    </div>
+</section>
+
+
+<section id="protocols" class="treatment-gallery-sculpture section-padding">
+    <div class="gallery-container">
+        <header class="gallery-header reveal-on-scroll">
+            <h2 class="gallery-title">TRAITEMENTS <br> <em>VISAGE</em></h2>
+            <div class="gallery-line"></div>
+        </header>
+
+        <div class="treatment-discovery-bar reveal-on-scroll">
+            <div class="search-wrapper">
+                <input type="text" class="search-input" placeholder="RECHERCHER UN SOIN..." id="treatmentSearch">
+                <div class="search-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <div class="search-scanner-line"></div>
+            </div>
+        </div>
+
+        <div class="treatment-matrix">
+            @if (Model != null && Model.Any())
+            {
+                int i = 1;
+                foreach (var item in Model)
+                {
+                    <div class="matrix-item reveal-on-scroll" style="transition-delay: @(0.1 * (i-1))s;">
+                        <div class="matrix-visual">
+                            <img src="@item.ImageUrl" alt="@item.Title">
+                            <div class="matrix-overlay"></div>
+                            <span class="matrix-num">@i.ToString("D2")</span>
+                        </div>
+                        <div class="matrix-content">
+                            <h3 class="matrix-name">@item.Title</h3>
+                            <p class="matrix-desc">@item.Description</p>
+                            @if (!string.IsNullOrEmpty(item.ProtocolDetails))
+                            {
+                                <a href="/Home/Treatment/@item.Id" class="matrix-link">PROTOCOL DETAILS</a>
+                            }
+                        </div>
+                    </div>
+                    i++;
+                }
+            }
+            else
+            {
+                <!-- Fallback to static if no data in DB yet -->
+                <!-- Treatment 1: Botox -->
+                <div class="matrix-item reveal-on-scroll">
+                    <div class="matrix-visual">
+                        <img src="/images/medical_face.png" alt="Botox">
+                        <div class="matrix-overlay"></div>
+                        <span class="matrix-num">01</span>
+                    </div>
+                    <div class="matrix-content">
+                        <h3 class="matrix-name">INJECTION DE BOTOX</h3>
+                        <p class="matrix-desc">Neuromodulation pour lisser les rides d'expression tout en préservant le naturel du regard.</p>
+                        <a href="#" class="matrix-link">PROTOCOL DETAILS</a>
+                    </div>
+                </div>
+
+                <!-- Treatment 2: Hyaluronic Acid -->
+                <div class="matrix-item reveal-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="matrix-visual">
+                        <img src="/images/face2.jpg" alt="Acide Hyaluronique">
+                        <div class="matrix-overlay"></div>
+                        <span class="matrix-num">02</span>
+                    </div>
+                    <div class="matrix-content">
+                        <h3 class="matrix-name">COMBLEMENT PAR ACIDE HYALURONIQUE</h3>
+                        <p class="matrix-desc">Restauration des volumes et remodelage des contours pour une harmonie faciale retrouvée.</p>
+                        <a href="#" class="matrix-link">PROTOCOL DETAILS</a>
+                    </div>
+                </div>
+
+                <!-- Treatment 3: Mesolift -->
+                <div class="matrix-item reveal-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="matrix-visual">
+                        <img src="/images/face3.jpg" alt="Mesolift">
+                        <div class="matrix-overlay"></div>
+                        <span class="matrix-num">03</span>
+                    </div>
+                    <div class="matrix-content">
+                        <h3 class="matrix-name">MÉSOLIFT (MÉSOTHÉRAPIE)</h3>
+                        <p class="matrix-desc">Revitalisation intense de la peau par micro-injections d'un cocktail nutritif et hydratant.</p>
+                        <a href="#" class="matrix-link">PROTOCOL DETAILS</a>
+                    </div>
+                </div>
+
+                <!-- Treatment 4: Microneedling -->
+                <div class="matrix-item reveal-on-scroll" style="transition-delay: 0.3s;">
+                    <div class="matrix-visual">
+                        <img src="/images/face4.jpg" alt="Microneedling">
+                        <div class="matrix-overlay"></div>
+                        <span class="matrix-num">04</span>
+                    </div>
+                    <div class="matrix-content">
+                        <h3 class="matrix-name">MICRONEEDLING</h3>
+                        <p class="matrix-desc">Stimulation naturelle du collagène pour affiner le grain de peau et traiter les imperfections.</p>
+                        <a href="#" class="matrix-link">PROTOCOL DETAILS</a>
+                    </div>
+                </div>
+
+                <!-- Treatment 5: Peeling -->
+                <div class="matrix-item reveal-on-scroll" style="transition-delay: 0.4s;">
+                    <div class="matrix-visual">
+                        <img src="/images/face5.jpg" alt="Peeling">
+                        <div class="matrix-overlay"></div>
+                        <span class="matrix-num">05</span>
+                    </div>
+                    <div class="matrix-content">
+                        <h3 class="matrix-name">PEELING SUPERFICIEL / MOYEN / PROFOND</h3>
+                        <p class="matrix-desc">Exfoliation médicale adaptée pour renouveler l'épiderme et corriger le teint.</p>
+                        <a href="#" class="matrix-link">PROTOCOL DETAILS</a>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+        <div id="noResults" class="no-results-msg">Aucun soin ne correspond à votre recherche.</div>
+
+        <script>
+            document.getElementById('treatmentSearch').addEventListener('input', function(e) {
+                const term = e.target.value.toLowerCase();
+                const items = document.querySelectorAll('.matrix-item');
+                let hasResults = false;
+                
+                items.forEach(item => {
+                    const title = item.querySelector('.matrix-name').textContent.toLowerCase();
+                    const desc = item.querySelector('.matrix-desc').textContent.toLowerCase();
+                    
+                    if (title.includes(term) || desc.includes(term)) {
+                        item.classList.remove('hidden');
+                        hasResults = true;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+                
+                document.getElementById('noResults').style.display = hasResults ? 'none' : 'block';
+            });
+        </script>
+    </div>
+</section>
+</section>
+<section id="expertise" class="tech-metrics-section">
+    <div class="gallery-container">
+        <header class="gallery-header reveal-on-scroll">
+            <h2 class="gallery-title">TECHNOLOGIES <br> <em>& PRODUITS</em></h2>
+            <div class="gallery-line"></div>
+        </header>
+
+        <div class="metrics-grid">
+            <div class="metric-card reveal-on-scroll">
+                <span class="metric-num">MESURE 01</span>
+                <h3 class="metric-title">PRODUITS BIOLOGIQUES PREMIUM</h3>
+                <p class="metric-desc">Nous utilisons exclusivement des acides hyaluroniques et des neuromodulateurs approuvés par la FDA provenant des meilleurs laboratoires mondiaux.</p>
+            </div>
+            <div class="metric-card reveal-on-scroll" style="transition-delay: 0.1s;">
+                <span class="metric-num">MESURE 02</span>
+                <h3 class="metric-title">PRÉCISION ANATOMIQUE</h3>
+                <p class="metric-desc">Chaque injection est guidée par une connaissance approfondie de la musculature faciale pour garantir des résultats naturels et dynamiques.</p>
+            </div>
+            <div class="metric-card reveal-on-scroll" style="transition-delay: 0.2s;">
+                <span class="metric-num">MESURE 03</span>
+                <h3 class="metric-title">SÉCURITÉ OPTIMALE</h3>
+                <p class="metric-desc">Toutes les procédures sont effectuées dans un environnement clinique stérile avec des protocoles d'observation de qualité médicale.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+</section>
+
+<section id="results" class="transformation-showcase section-padding">
+    <div class="showcase-container">
+        <header class="showcase-header reveal-on-scroll">
+            <span class="showcase-label">ÉTUDE DE CAS: #F-920</span>
+            <h2 class="showcase-title">UNE TRANSFORMATION <br> <em>ARCHITECTURALE</em></h2>
+        </header>
+
+        <div class="cinematic-reveal reveal-on-scroll">
+            <img src="/images/face_transformation.png" alt="Face Transformation">
+            <div class="reveal-labels">
+                <span class="reveal-label">AVANT</span>
+                <span class="reveal-label">APRÈS</span>
+            </div>
+        </div>
+
+        <div class="showcase-footer reveal-on-scroll">
+            <div class="footer-metadata">
+                <span class="metadata-item">PROTOCOLE: <span>SCULPTURE VOLUMÉTRIQUE</span></span>
+                <span class="metadata-item">DURÉE: <span>45 MINUTES</span></span>
+                <span class="metadata-item">RÉSULTAT: <span>IMMÉDIAT</span></span>
+            </div>
+            <a href="/Home/Results" class="showcase-cta">CONSULTER TOUS LES RÉSULTATS →</a>
+        </div>
+    </div>
+</section>
+
+</section>
+
+<section id="journey" class="procedure-journey">
+    <div class="journey-container">
+        <header class="gallery-header reveal-on-scroll">
+            <h2 class="gallery-title">DÉROULEMENT <br> <em>DU SOIN</em></h2>
+            <div class="gallery-line"></div>
+        </header>
+
+        <div class="journey-steps">
+            <div class="journey-step reveal-on-scroll">
+                <div class="step-line"></div>
+                <div class="step-dot"></div>
+                <span class="step-label">PHASE 01</span>
+                <h3 class="step-title">CONSULTATION</h3>
+                <p class="step-text">Évaluation numérique des proportions faciales et de la qualité de la peau pour concevoir votre protocole personnalisé.</p>
+            </div>
+            <div class="journey-step reveal-on-scroll" style="transition-delay: 0.1s;">
+                <div class="step-line"></div>
+                <div class="step-dot"></div>
+                <span class="step-label">PHASE 02</span>
+                <h3 class="step-title">PRÉPARATION</h3>
+                <p class="step-text">Cartographie des points d'injection et application d'un refroidissement anesthésique pour une expérience confortable.</p>
+            </div>
+            <div class="journey-step reveal-on-scroll" style="transition-delay: 0.2s;">
+                <div class="step-line"></div>
+                <div class="step-dot"></div>
+                <span class="step-label">PHASE 03</span>
+                <h3 class="step-title">SCULPTURE</h3>
+                <p class="step-text">La procédure elle-même, effectuée avec un soin méticuleux pour réaliser le changement architectural prévu.</p>
+            </div>
+            <div class="journey-step reveal-on-scroll" style="transition-delay: 0.3s;">
+                <div class="step-line"></div>
+                <div class="step-dot"></div>
+                <span class="step-label">PHASE 04</span>
+                <h3 class="step-title">ÉVOLUTION</h3>
+                <p class="step-text">Suivi post-traitement et surveillance de vos résultats au fur et à mesure qu'ils s'installent dans leur éclat final.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+</section>
+
+<section id="faq" class="faq-clinical">
+    <div class="faq-container">
+        <header class="gallery-header reveal-on-scroll">
+            <h2 class="gallery-title">QUESTIONS <br> <em>FRÉQUENTES</em></h2>
+            <div class="gallery-line"></div>
+        </header>
+
+        <div class="faq-list">
+            <div class="faq-item reveal-on-scroll">
+                <button class="faq-question">
+                    <span class="faq-q-text">Combien de temps durent les résultats du visage ?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-a-content">
+                        Les produits de comblement durent généralement de 9 à 18 mois selon la zone, tandis que les résultats du Botox restent optimaux pendant 4 à 6 mois. Votre constitution biologique et votre mode de vie jouent également un rôle dans la longévité.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item reveal-on-scroll">
+                <button class="faq-question">
+                    <span class="faq-q-text">Y a-t-il un temps d'arrêt après la procédure ?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-a-content">
+                        La plupart des traitements du visage impliquent un temps d'arrêt minimal. Vous pouvez ressentir une légère rougeur ou un gonflement pendant 24 à 48 heures, mais vous pouvez généralement reprendre vos activités sociales immédiatement.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item reveal-on-scroll">
+                <button class="faq-question">
+                    <span class="faq-q-text">Mes résultats auront-ils l'air naturels ?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-a-content">
+                        La philosophie du centre Les Jasmins, sous la direction du Dr Ashraaf Mellouli Laroussi, est centrée sur le "Look Intact". Notre objectif est de mettre en valeur vos traits et de restaurer votre jeunesse sans compromettre vos expressions naturelles ou votre anatomie.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="artistic-cta reveal-on-scroll">
+    <div class="cta-inner">
+        <span class="cta-eyebrow">ARCHITECTURE FACIALE</span>
+        <div class="cta-ornament"></div>
+        <h2 class="cta-title">PRÊT À ARCHITECTURER <br> VOTRE ÉCLAT ?</h2>
+        <p class="cta-subtitle">Découvrez l'art de l'harmonie faciale grâce à une consultation sur mesure adaptée à votre anatomie unique.</p>
+        <a asp-controller="Home" asp-action="Contact" class="luxury-pill-btn">PRENDRE RENDEZ-VOUS</a>
+    </div>
+</section>
+
+<footer class="lux-footer">
+    <div class="footer-bg-line"></div>
+    <div class="footer-container">
+        <!-- Brand Area -->
+        <div class="footer-left">
+            <div class="footer-brand-wrap">
+                <span class="footer-logo">Les Jasmins</span>
+                <p class="footer-tagline">
+                    L'excellence en dermatologie esthétique au sein du Kantaoui Medical Center. Une vision architecturale de la beauté.
+                </p>
+                <div class="footer-signature">Dir. Dr A. Mellouli Laroussi</div>
+            </div>
+        </div>
+
+        <!-- Links & Info Grid -->
+        <div class="footer-right">
+            <!-- Nav -->
+            <div>
+                <h4 class="footer-col-title">Navigation</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="/#hero">Radiance</a></li>
+                    <li><a href="/Home/About">Le Centre</a></li>
+                    <li><a href="/#traitements">Collection</a></li>
+                    <li><a href="/Home/Results">Résultats</a></li>
+                    <li><a href="/#expertise">Expertise</a></li>
+                    <li><a asp-controller="Home" asp-action="Article">Journal</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact/Info -->
+            <div>
+                <h4 class="footer-col-title">Information</h4>
+                <div class="footer-info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <span class="footer-info-label">Lieu</span>
+                        <p class="footer-info-value">Kantaoui Medical Center, Bloc A, 5ème Étage<br>Hammam Sousse, Sousse, Tunisie</p>
+                    </div>
+                </div>
+                <div class="footer-info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <span class="footer-info-label">Contact</span>
+                        <p class="footer-info-value">+216 20 402 049<br>ash.laroussi@yahoo.fr</p>
+                    </div>
+                </div>
+                <div class="footer-info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <span class="footer-info-label">Horaires</span>
+                        <p class="footer-info-value">Lun — Ven : 09:00 - 18:00<br>Sat : 09:00 - 13:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+        <div class="footer-social-links">
+            <a href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                INSTAGRAM
+            </a>
+            <a href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                FACEBOOK
+            </a>
+            <a href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LINKEDIN
+            </a>
+        </div>
+        <span>© 2026 CENTRE LES JASMINS — TOUS DROITS RÉSERVÉS</span>
+        <span style="opacity: 0.5;">DESIGN PAR RADIANCE EDITORIAL</span>
+    </div>
+</footer>

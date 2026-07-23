@@ -1,0 +1,57 @@
+@model IEnumerable<DrAshrafMellouli.Models.Appointment>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Gestion des Rendez-vous";
+}
+
+<div class="admin-header">
+    <h1 class="admin-title">Rendez-vous & Contacts</h1>
+</div>
+
+<div class="admin-card">
+    <table class="table-lux">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Patient</th>
+                <th>Contact</th>
+                <th>Service</th>
+                <th>Message</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="white-space: nowrap;">@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td style="font-weight: 600;">@item.FullName</td>
+                    <td>
+                        <div><a href="mailto:@item.Email" style="color: var(--admin-primary); text-decoration: none;">@item.Email</a></div>
+                        @if (!string.IsNullOrEmpty(item.Phone))
+                        {
+                            <div style="font-size: 0.85em; color: #666;">@item.Phone</div>
+                        }
+                    </td>
+                    <td><span style="background: rgba(198,168,124,0.1); color: var(--admin-accent); padding: 4px 8px; border-radius: 4px; font-size: 0.85em;">@item.Service</span></td>
+                    <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="@item.Message">
+                        @item.Message
+                    </td>
+                    <td>
+                        <form asp-action="DeleteAppointment" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Supprimer ce rendez-vous ?');">
+                            <button type="submit" class="delete-btn">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 50px; color: var(--admin-text-muted)">
+                        Aucun rendez-vous trouvé.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

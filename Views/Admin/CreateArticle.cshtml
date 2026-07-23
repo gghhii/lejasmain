@@ -1,0 +1,111 @@
+@model DrAshrafMellouli.Models.Article
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Publier un Article";
+}
+
+<div class="admin-header">
+    <h1 class="admin-title">@ViewData["Title"]</h1>
+    <a asp-action="Articles" class="action-link">← Retour à la liste</a>
+</div>
+
+<div class="admin-card" style="max-width: 800px;">
+    <form asp-action="CreateArticle" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label asp-for="Title" class="form-label">Titre de l'Article</label>
+            <input asp-for="Title" class="form-control" placeholder="ex: Les bienfaits du PRP capillaire" />
+            <span asp-validation-for="Title" style="color: #ff4d4d; font-size: 0.8rem;"></span>
+        </div>
+
+        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <label asp-for="CategoryName" class="form-label">Catégorie</label>
+                <input asp-for="CategoryName" class="form-control" placeholder="ex: SIGNATURE SOINS" />
+            </div>
+            <div>
+                <label asp-for="DatePublished" class="form-label">Date de Publication</label>
+                <input asp-for="DatePublished" type="date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description" class="form-label">Description Courte</label>
+            <textarea asp-for="Description" class="form-control" style="min-height: 80px;" placeholder="Un court résumé..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Content" class="form-label">Contenu complet de l'article</label>
+            <textarea asp-for="Content" class="form-control" style="min-height: 250px;" placeholder="Rédigez l'article complet ici..."></textarea>
+            <span asp-validation-for="Content" style="color: #ff4d4d; font-size: 0.8rem;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Image de Couverture</label>
+            <div class="file-upload-zone" id="uploadZone">
+                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--admin-accent); margin-bottom: 10px;">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <p class="upload-label">Glissez une image ici, ou <span class="upload-browse">cliquez pour parcourir</span></p>
+                <p class="upload-hint">JPG, PNG, GIF, WEBP</p>
+                <input type="file" name="imageFile" id="imageFile" accept="image/*" class="file-input-hidden" />
+            </div>
+            <div id="imagePreview" class="image-preview-box" style="display:none;">
+                <img id="previewImg" src="" alt="Aperçu" />
+                <button type="button" class="remove-image-btn" onclick="removeImage()">✕ Supprimer</button>
+            </div>
+        </div>
+
+
+        <div style="margin-top: 40px;">
+            <button type="submit" class="btn-luxury">Publier l'Article</button>
+        </div>
+    </form>
+</div>
+
+<style>
+.file-upload-zone { border: 2px dashed rgba(197,160,89,0.4); border-radius: 10px; padding: 35px; text-align: center; cursor: pointer; transition: all 0.3s; position: relative; }
+.file-upload-zone:hover, .file-upload-zone.drag-over { border-color: var(--admin-accent); background: rgba(197,160,89,0.05); }
+.upload-label { margin: 0 0 6px; font-size: 0.95rem; }
+.upload-browse { color: var(--admin-accent); font-weight: 600; }
+.upload-hint { color: var(--admin-text-muted); font-size: 0.8rem; margin: 0; }
+.file-input-hidden { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.image-preview-box { margin-top: 14px; position: relative; display: inline-block; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+.image-preview-box img { max-height: 220px; max-width: 100%; display: block; }
+.remove-image-btn { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.7); color: #ff4d4d; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+</style>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        const zone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('imageFile');
+        const preview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+
+        fileInput.addEventListener('change', function () {
+            if (this.files && this.files[0]) showPreview(this.files[0]);
+        });
+        zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+        zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+        zone.addEventListener('drop', e => {
+            e.preventDefault(); zone.classList.remove('drag-over');
+            if (e.dataTransfer.files[0]) { fileInput.files = e.dataTransfer.files; showPreview(e.dataTransfer.files[0]); }
+        });
+        function showPreview(file) {
+            const reader = new FileReader();
+            reader.onload = e => { previewImg.src = e.target.result; };
+            reader.readAsDataURL(file);
+            zone.style.display = 'none';
+            preview.style.display = 'block';
+        }
+        function removeImage() {
+            fileInput.value = '';
+            previewImg.src = '';
+            zone.style.display = 'block';
+            preview.style.display = 'none';
+        }
+    </script>
+}

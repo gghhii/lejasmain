@@ -1,0 +1,365 @@
+@model DrAshrafMellouli.Models.Treatment
+@{
+    ViewData["Title"] = Model.Title + " - Les Jasmins";
+    var related = ViewBag.RelatedTreatments as List<DrAshrafMellouli.Models.Treatment>;
+}
+
+<style>
+    .treatment-dossier-page {
+        background: #050505;
+        color: #fff;
+        padding-bottom: 10rem;
+    }
+
+    /* --- HI-TECH HEADER --- */
+    .dossier-hero {
+        position: relative;
+        height: 70vh;
+        overflow: visible;
+        border-bottom: 1px solid rgba(198, 168, 124, 0.2);
+    }
+
+    .dossier-hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.6) grayscale(0.5);
+    }
+
+    .dossier-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, #050505, transparent);
+        display: flex;
+        align-items: center;
+        padding: 4rem 10%;
+    }
+
+    .dossier-badge {
+        font-size: 0.6rem;
+        letter-spacing: 0.4em;
+        color: var(--color-gold);
+        text-transform: uppercase;
+        border: 1px solid var(--color-gold);
+        padding: 0.5rem 1rem;
+        display: inline-block;
+        margin-bottom: 2rem;
+    }
+
+    .dossier-h1 {
+        font-family: var(--font-serif);
+        font-size: clamp(3rem, 6vw, 4.5rem);
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    /* --- MODULAR GRID --- */
+    .dossier-grid {
+        width: 90%;
+        max-width: 1400px;
+        margin: -5rem auto 0;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 3rem;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* --- MAIN CASE CARD --- */
+    .case-card {
+        background: #0f0f0f;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 5rem;
+        position: relative;
+    }
+
+    .case-card__corner {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 0.55rem;
+        color: rgba(255,255,255,0.2);
+        letter-spacing: 0.2em;
+    }
+
+    .case-section {
+        margin-bottom: 5rem;
+    }
+
+    .case-label {
+        font-size: 0.6rem;
+        color: var(--color-gold);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 1.5rem;
+    }
+
+    .case-title {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .case-text {
+        font-size: 1.15rem;
+        line-height: 1.8;
+        color: rgba(255,255,255,0.7);
+    }
+
+    .case-text p {
+        margin-bottom: 2rem;
+    }
+
+    /* --- SIDEBAR TECH PANEL --- */
+    .tech-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .tech-box {
+        background: #0f0f0f;
+        border: 1px solid rgba(198, 168, 124, 0.1);
+        padding: 2.5rem;
+    }
+
+    .tech-box__title {
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        color: var(--color-gold);
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        display: block;
+        border-bottom: 1px solid rgba(198, 168, 124, 0.1);
+        padding-bottom: 1rem;
+    }
+
+    .tech-metric {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+        font-size: 0.85rem;
+    }
+
+    .tech-metric span:first-child {
+        color: rgba(255,255,255,0.4);
+    }
+
+    .tech-metric span:last-child {
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .booking-card {
+        background: var(--color-gold);
+        color: #000;
+        padding: 3rem;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        transition: transform 0.4s ease;
+    }
+
+    .booking-card:hover {
+        transform: translateY(-10px);
+        background: #fff;
+    }
+
+    .booking-card h3 {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .booking-card p {
+        font-size: 0.8rem;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    /* --- RELATED --- */
+    .dossier-footer {
+        padding: 10rem 10% 5rem;
+    }
+
+    .footer-title {
+        font-family: var(--font-serif);
+        font-size: 2.5rem;
+        margin-bottom: 4rem;
+    }
+
+    .compact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .compact-card {
+        background: #0f0f0f;
+        border: 1px solid rgba(255,255,255,0.05);
+        display: flex;
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.4s ease;
+    }
+
+    .compact-card:hover {
+        border-color: var(--color-gold);
+    }
+
+    .compact-img {
+        width: 100px;
+        height: 100px;
+        flex-shrink: 0;
+    }
+
+    .compact-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .compact-info {
+        padding: 1.5rem;
+    }
+
+    .compact-name {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .compact-link {
+        font-size: 0.6rem;
+        color: var(--color-gold);
+        text-transform: uppercase;
+        margin-top: 0.5rem;
+        display: block;
+    }
+
+    @@media (max-width: 1024px) {
+        .dossier-grid { grid-template-columns: 1fr; margin-top: 2rem; }
+        .case-card { padding: 2.5rem; }
+        .dossier-hero { height: 50vh; }
+        .dossier-h1 { font-size: 2.2rem; word-break: break-word; hyphens: auto; line-height: 1.1; }
+        .dossier-hero-overlay { padding-top: 6rem; align-items: flex-end; padding-bottom: 3rem; }
+        .dossier-badge { margin-bottom: 1rem; }
+    }
+</style>
+
+<div class="treatment-dossier-page">
+    <header class="dossier-hero">
+        <img src="@(Model.ImageUrl ?? "/images/medical_face.png")" alt="@Model.Title">
+        <div class="dossier-hero-overlay">
+            <div class="reveal-on-scroll">
+                <span class="dossier-badge">TREATMENT DOSSIER</span>
+                <h1 class="dossier-h1">@Model.Title.ToUpper()</h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="dossier-grid">
+        <!-- MAIN INFORMATION -->
+        <article class="case-card reveal-on-scroll">
+            <span class="case-card__corner">REF: LJ-T@(Model.Id.ToString("D3"))</span>
+            
+            <div class="case-section">
+                <span class="case-label">01 / ANALYSE CLINIQUE</span>
+                <h2 class="case-title">Objet du Traitement</h2>
+                <div class="case-text">
+                    <p>@Model.Description</p>
+                    <p>À travers ce pôle spécialisé, le Centre Les Jasmins redéfinit les standards de la dermatologie esthétique en alliant la science biomédicale à une vision artistique du corps et du visage.</p>
+                </div>
+            </div>
+
+            <div class="case-section">
+                <span class="case-label">02 / PROTOCOLE TECHNIQUE</span>
+                <h2 class="case-title">Méthodologie & Étapes</h2>
+                <div class="case-text">
+                    @if (!string.IsNullOrEmpty(Model.ProtocolDetails))
+                    {
+                        @Html.Raw(Model.ProtocolDetails)
+                    }
+                    else
+                    {
+                        <p>La séance est orchestrée selon un protocole strict visant la sécurité maximale et l'optimisation des résultats. Chaque étape est supervisée par nos expertes diplômées.</p>
+                        <p>Le processus inclut une consultation préparatoire, une phase opératoire de haute précision et un suivi post-acte personnalisé.</p>
+                    }
+                </div>
+            </div>
+
+            <div class="case-section" style="margin-bottom: 0;">
+                <span class="case-label">03 / RÉSULTATS ATTENDUS</span>
+                <h2 class="case-title">L'Effet Les Jasmins</h2>
+                <div class="case-text">
+                    <p>Notre signature repose sur le naturel. L'objectif n'est pas de transformer, mais de sublimer les lignes de forces préexistantes pour un résultat harmonieux et durable.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- SIDEBAR DATA -->
+        <aside class="tech-panel">
+            <div class="tech-box reveal-on-scroll">
+                <span class="tech-box__title">SPÉCIFICATIONS</span>
+                <div class="tech-metric">
+                    <span>DOMAINE</span>
+                    <span>@Model.Category</span>
+                </div>
+                <div class="tech-metric">
+                    <span>TEMPS MOYEN</span>
+                    <span>45 MIN</span>
+                </div>
+                <div class="tech-metric">
+                    <span>TECHNOLOGIE</span>
+                    <span>@(Model.Category == Category.Laser ? "Laser Médical" : "Injections Pro")</span>
+                </div>
+                <div class="tech-metric">
+                    <span>RÉCUPÉRATION</span>
+                    <span>IMMÉDIATE</span>
+                </div>
+            </div>
+
+            <div class="tech-box reveal-on-scroll" style="transition-delay: 0.1s;">
+                <span class="tech-box__title">SUPERVISION</span>
+                <div class="tech-metric">
+                    <span>DOCTEUR 1</span>
+                    <span>DR. LAROUSSI</span>
+                </div>
+                <div class="tech-metric">
+                    <span>DOCTEUR 2</span>
+                    <span>DR. KASSASSI</span>
+                </div>
+            </div>
+
+            <a asp-action="Contact" class="booking-card reveal-on-scroll" style="transition-delay: 0.2s;">
+                <h3>PRENDRE RENDEZ-VOUS</h3>
+                <p>Consultation Immédiate</p>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </aside>
+    </div>
+
+    <!-- RELATED FOOTER -->
+    @if (related != null && related.Any())
+    {
+        <footer class="dossier-footer">
+            <h2 class="footer-title reveal-on-scroll">DOSSIERS <em>CONNEXES</em></h2>
+            <div class="compact-grid">
+                @foreach (var item in related)
+                {
+                    <a href="/Home/Treatment/@item.Id" class="compact-card reveal-on-scroll">
+                        <div class="compact-img">
+                            <img src="@(item.ImageUrl ?? "/images/medical_face.png")" alt="@item.Title">
+                        </div>
+                        <div class="compact-info">
+                            <h4 class="compact-name">@item.Title</h4>
+                            <span class="compact-link">CONSULTER LE DOSSIER</span>
+                        </div>
+                    </a>
+                }
+            </div>
+        </footer>
+    }
+</div>

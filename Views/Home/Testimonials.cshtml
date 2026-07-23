@@ -1,0 +1,607 @@
+@model IEnumerable<DrAshrafMellouli.Models.Testimonial>
+@{
+    ViewData["Title"] = "Avis Patients - Les Jasmins";
+}
+<!-- ATMOSPHERIC JOURNEY NAVIGATION: FLOATING GLASS PILL -->
+<div class="journey-glass-nav" id="journeyNav">
+    <a href="#hero" class="journey-link active" data-section="hero">ACCUEIL</a>
+    <a href="#voices" class="journey-link" data-section="voices">TÉMOIGNAGES</a>
+    <a href="#journey" class="journey-link" data-section="journey">DÉROULEMENT</a>
+    <a href="#trust" class="journey-link" data-section="trust">RÉPUTATION</a>
+</div>
+
+<section id="hero" class="treatment-clinical-split">
+    <div class="clinical-split-sculpture">
+        <!-- Left Side: Technical Data -->
+        <div class="clinical-data-column reveal-on-scroll">
+            <div class="data-badge">PROTOCOLE : VOIX</div>
+            <div class="data-readout">
+                <span>SATISFACTION : 99.8%</span>
+                <span>TYPE : ODYSSÉE DES PATIENTS</span>
+                <span>v1.2.0</span>
+            </div>
+            <h1 class="clinical-title">
+                ÉCHOS <br>
+                <span class="gold-italic">DES PATIENTS</span>
+            </h1>
+            <p class="clinical-lead">
+                Une collection authentique d'expériences de notre communauté mondiale. La véritable mesure de notre art médical.
+            </p>
+            
+            <div class="clinical-abstract-mesh"></div>
+        </div>
+
+        <!-- Right Side: Ethereal Portrait -->
+        <div class="clinical-visual-column">
+            <img class="clinical-portrait-img" src="/images/clinical_symmetry_hero.png" alt="Patient Voices">
+            <div class="visual-scan-line"></div>
+            <div class="visual-topo-overlay"></div>
+            <div class="visual-corner-tags">
+                <span>HARMONIE</span>
+                <span>CONFIANCE</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="clinical-scroll-indicator">
+        <span class="scroll-label">LIRE LES PARCOURS</span>
+        <div class="scroll-monolith-line"></div>
+    </div>
+</section>
+
+<section id="voices" class="testi-section">
+    <div class="testi-container">
+
+        <div class="testi-label reveal-on-scroll">
+            <span class="testi-tag">TÉMOIGNAGES</span>
+            <h2 class="testi-heading">Ce que disent <em>nos patients</em></h2>
+            <p class="testi-sub">Des résultats authentiques, des expériences réelles.</p>
+        </div>
+
+        <div class="testi-grid">
+
+            @if (Model != null && Model.Any())
+            {
+                float delay = 0;
+                foreach (var item in Model)
+                {
+                    <div class="testi-card @(item.IsFeatured ? "testi-card--featured" : "") reveal-on-scroll" style="transition-delay:@(delay)s">
+                        @if (item.IsFeatured)
+                        {
+                            <div class="testi-featured-badge">★ ELITE</div>
+                        }
+                        <div class="testi-card-top">
+                            <div class="testi-avatar" style="background: @(item.IsFeatured ? "linear-gradient(135deg, #1a1a1a, #444)" : "linear-gradient(135deg, #c6a87c, #e8d5b0)")">@item.Initials</div>
+                            <div class="testi-stars @(item.IsFeatured ? "testi-stars--gold" : "")">
+                                @for(int s=0; s<item.Rating; s++) { <text>★</text> }
+                            </div>
+                        </div>
+                        <blockquote class="testi-quote @(item.IsFeatured ? "testi-quote--featured" : "")">
+                            "@item.Content"
+                        </blockquote>
+                        <div class="testi-author">
+                            <span class="testi-name">@item.Name</span>
+                            <span class="testi-procedure">@item.Procedure</span>
+                        </div>
+                    </div>
+                    delay += 0.1f;
+                }
+            }
+            else
+            {
+                <!-- Fallback to static if no data -->
+                <div class="testi-card reveal-on-scroll">
+                    <div class="testi-card-top">
+                        <div class="testi-avatar" style="background: linear-gradient(135deg, #c6a87c, #e8d5b0);">SL</div>
+                        <div class="testi-stars">★★★★★</div>
+                    </div>
+                    <blockquote class="testi-quote">
+                        "L'approche du Dr Mellouli est d'une finesse incroyable. Elle ne cherche pas à transformer, mais à sublimer. Le résultat est d'un naturel qui a bluffé mon entourage."
+                    </blockquote>
+                    <div class="testi-author">
+                        <span class="testi-name">Sophie Laurent</span>
+                        <span class="testi-procedure">Acide Hyaluronique</span>
+                    </div>
+                </div>
+
+                <div class="testi-card testi-card--featured reveal-on-scroll" style="transition-delay:0.1s">
+                    <div class="testi-featured-badge">★ ELITE</div>
+                    <div class="testi-card-top">
+                        <div class="testi-avatar" style="background: linear-gradient(135deg, #1a1a1a, #444);">ER</div>
+                        <div class="testi-stars testi-stars--gold">★★★★★</div>
+                    </div>
+                    <blockquote class="testi-quote testi-quote--featured">
+                        "Une vision architecturale de la beauté. On sent que chaque geste est réfléchi, mesuré. Ma peau n'a jamais été aussi rayonnante après mon protocole laser fractionné."
+                    </blockquote>
+                    <div class="testi-author">
+                        <span class="testi-name">Elena Rizzi</span>
+                        <span class="testi-procedure">Laser Skin Resurfacing</span>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="testi-stats reveal-on-scroll">
+            <div class="testi-stat">
+                <span class="stat-number">99.8%</span>
+                <span class="stat-label">Taux de satisfaction</span>
+            </div>
+            <div class="testi-stat-divider"></div>
+            <div class="testi-stat">
+                <span class="stat-number">@((Model?.Count() ?? 0) + 242)+</span>
+                <span class="stat-label">Avis vérifiés</span>
+            </div>
+            <div class="testi-stat-divider"></div>
+            <div class="testi-stat">
+                <span class="stat-number">★ 5.0</span>
+                <span class="stat-label">Note moyenne</span>
+            </div>
+    </div>
+</section>
+
+</section>
+
+<section id="journey" class="procedure-journey">
+    <div class="journey-container">
+        <header class="gallery-header reveal-on-scroll">
+            <h2 class="gallery-title">AVIS <br> <em>PATIENTS</em></h2>
+            <div class="gallery-line"></div>
+        </header>
+
+        <div class="journey-steps">
+            <div class="journey-step reveal-on-scroll">
+                <div class="step-line"></div>
+                <div class="step-dot"></div>
+                <span class="step-label">ÉTAPE 01</span>
+                <h3 class="step-title">ARRIVÉE</h3>
+                <p class="step-text">Réception de luxe au Kantaoui Medical Center, conçue pour l'intimité et le confort dans notre centre Les Jasmins.</p>
+            </div>
+            <div class="journey-step reveal-on-scroll" style="transition-delay: 0.1s;">
+                <div class="step-line"></div>
+                <div class="step-dot"></div>
+                <span class="step-label">ÉTAPE 02</span>
+                <h3 class="step-title">DIALOGUE</h3>
+                <p class="step-text">Une consultation à plusieurs niveaux où nous écoutons vos objectifs et analysons votre anatomie.</p>
+            </div>
+            <div class="journey-step reveal-on-scroll" style="transition-delay: 0.2s;">
+                <div class="step-line"></div>
+                <div class="step-dot"></div>
+                <span class="step-label">ÉTAPE 03</span>
+                <h3 class="step-title">EXÉCUTION</h3>
+                <p class="step-text">Procédure médicale réalisée avec une précision de qualité chirurgicale et des soins personnalisés.</p>
+            </div>
+            <div class="journey-step reveal-on-scroll" style="transition-delay: 0.3s;">
+                <div class="step-line"></div>
+                <div class="step-dot"></div>
+                <span class="step-label">ÉTAPE 04</span>
+                <h3 class="step-title">RÉFLEXION</h3>
+                <p class="step-text">Suivi et surveillance à long terme pour garantir que votre satisfaction reste absolue.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+</section>
+
+<section id="trust" class="tech-metrics-section">
+    <div class="gallery-container">
+        <header class="gallery-header reveal-on-scroll">
+            <h2 class="gallery-title">NOTRE <br> <em>RÉPUTATION</em></h2>
+            <div class="gallery-line"></div>
+        </header>
+
+        <div class="metrics-grid">
+            <div class="metric-card reveal-on-scroll">
+                <span class="metric-num">DONNÉE 01</span>
+                <h3 class="metric-title">PATIENTS INTERNATIONAUX</h3>
+                <p class="metric-desc">Plus de 30 % de notre base clinique provient d'Europe et du Maghreb spécifiquement pour les protocoles esthétiques de qualité chirurgicale du Dr Mellouli.</p>
+            </div>
+            <div class="metric-card reveal-on-scroll" style="transition-delay: 0.1s;">
+                <span class="metric-num">DONNÉE 02</span>
+                <h3 class="metric-title">TAUX DE RETOUR</h3>
+                <p class="metric-dynamic">85%</p>
+                <p class="metric-desc">La majorité de nos patients restent dans notre orbite clinique, revenant pour la maintenance des protocoles et les traitements évolués.</p>
+            </div>
+            <div class="metric-card reveal-on-scroll" style="transition-delay: 0.2s;">
+                <span class="metric-num">DONNÉE 03</span>
+                <h3 class="metric-title">SÉCURITÉ CLINIQUE</h3>
+                <p class="metric-desc">Zéro complication critique enregistrée sur plus de 12 000 protocoles, validée par les conseils de sécurité médicale internationaux.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="artistic-cta reveal-on-scroll">
+    <div class="cta-inner">
+        <h2 class="cta-title">REJOIGNEZ NOS <br> PATIENTS SATISFAITS</h2>
+        <a href="#rdv" class="luxury-pill-btn">PRENDRE RENDEZ-VOUS</a>
+    </div>
+</section>
+
+<style>
+    /* ===== TESTIMONIALS SECTION ===== */
+    .testi-section {
+        background: #0d0d0d;
+        padding: 9rem 0 8rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .testi-section::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background:
+            radial-gradient(ellipse 60% 40% at 15% 20%, rgba(198,168,124,0.07) 0%, transparent 60%),
+            radial-gradient(ellipse 50% 50% at 85% 80%, rgba(198,168,124,0.05) 0%, transparent 60%);
+        pointer-events: none;
+    }
+
+    .testi-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 5%;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Label / Heading */
+    .testi-label {
+        text-align: center;
+        margin-bottom: 5rem;
+    }
+
+    .testi-tag {
+        display: inline-block;
+        font-family: var(--font-sans, 'Inter', sans-serif);
+        font-size: 0.6rem;
+        letter-spacing: 0.3em;
+        color: var(--color-gold, #c6a87c);
+        border: 1px solid rgba(198,168,124,0.3);
+        padding: 6px 18px;
+        margin-bottom: 1.8rem;
+        text-transform: uppercase;
+    }
+
+    .testi-heading {
+        font-family: var(--font-serif, 'Cormorant Garamond', serif);
+        font-size: clamp(2.5rem, 5vw, 3.8rem);
+        color: #fff;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+    }
+
+    .testi-heading em {
+        color: var(--color-gold, #c6a87c);
+        font-style: italic;
+    }
+
+    .testi-sub {
+        font-family: var(--font-sans, 'Inter', sans-serif);
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.4);
+        letter-spacing: 0.05em;
+    }
+
+    /* Grid */
+    .testi-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-bottom: 5rem;
+    }
+
+    /* Card */
+    .testi-card {
+        background: #181818;
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 2px;
+        padding: 36px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        transition: transform 0.5s cubic-bezier(0.19,1,0.22,1),
+                    border-color 0.4s ease,
+                    box-shadow 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .testi-card::before {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0;
+        width: 100%; height: 2px;
+        background: linear-gradient(90deg, transparent, var(--color-gold, #c6a87c), transparent);
+        opacity: 0;
+        transition: opacity 0.4s;
+    }
+
+    .testi-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(198,168,124,0.25);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    }
+
+    .testi-card:hover::before {
+        opacity: 1;
+    }
+
+    /* Featured Card */
+    .testi-card--featured {
+        background: #111;
+        border-color: rgba(198,168,124,0.35);
+        box-shadow: 0 0 0 1px rgba(198,168,124,0.1), 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    .testi-featured-badge {
+        position: absolute;
+        top: -1px; right: 20px;
+        background: var(--color-gold, #c6a87c);
+        color: #000;
+        font-size: 0.45rem;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        padding: 5px 12px;
+        text-transform: uppercase;
+    }
+
+    /* Card Top */
+    .testi-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Avatar */
+    .testi-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-sans, 'Inter', sans-serif);
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 0.05em;
+        flex-shrink: 0;
+    }
+
+    /* Stars */
+    .testi-stars {
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.2);
+        letter-spacing: 2px;
+    }
+
+    .testi-stars--gold {
+        color: var(--color-gold, #c6a87c);
+    }
+
+    /* Quote */
+    .testi-quote {
+        font-family: var(--font-serif, 'Cormorant Garamond', serif);
+        font-size: 1.05rem;
+        line-height: 1.75;
+        color: rgba(255,255,255,0.72);
+        font-style: italic;
+        margin: 0;
+        flex: 1;
+        position: relative;
+        padding-left: 18px;
+        border-left: 2px solid rgba(198,168,124,0.2);
+    }
+
+    .testi-quote--featured {
+        color: rgba(255,255,255,0.88);
+        font-size: 1.1rem;
+        border-left-color: var(--color-gold, #c6a87c);
+    }
+
+    /* Author */
+    .testi-author {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .testi-name {
+        font-family: var(--font-serif, 'Cormorant Garamond', serif);
+        font-size: 1.1rem;
+        color: #fff;
+        letter-spacing: -0.01em;
+    }
+
+    .testi-procedure {
+        font-family: var(--font-sans, 'Inter', sans-serif);
+        font-size: 0.55rem;
+        letter-spacing: 0.2em;
+        color: var(--color-gold, #c6a87c);
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    /* Stats Bar */
+    .testi-stats {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        background: #181818;
+        border: 1px solid rgba(198,168,124,0.15);
+        padding: 40px 60px;
+        border-radius: 2px;
+    }
+
+    .testi-stat {
+        flex: 1;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .stat-number {
+        font-family: var(--font-serif, 'Cormorant Garamond', serif);
+        font-size: clamp(2rem, 3.5vw, 2.8rem);
+        color: var(--color-gold, #c6a87c);
+        line-height: 1;
+        letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+        font-family: var(--font-sans, 'Inter', sans-serif);
+        font-size: 0.55rem;
+        letter-spacing: 0.25em;
+        color: rgba(255,255,255,0.35);
+        text-transform: uppercase;
+    }
+
+    .testi-stat-divider {
+        width: 1px;
+        height: 60px;
+        background: rgba(198,168,124,0.15);
+        flex-shrink: 0;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @@media (max-width: 1024px) {
+        .testi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @@media (max-width: 640px) {
+        .testi-grid { grid-template-columns: 1fr; }
+        .testi-stats { flex-direction: column; gap: 30px; padding: 40px 30px; }
+        .testi-stat-divider { width: 60px; height: 1px; }
+    }
+
+    /* ===== CTA BUTTON ===== */
+    .luxury-pill-btn {
+        display: inline-block;
+        padding: 1.2rem 3.5rem;
+        background: transparent;
+        border: 1px solid var(--color-gold, #c6a87c);
+        color: var(--color-gold, #c6a87c);
+        text-decoration: none;
+        font-family: var(--font-sans, 'Inter', sans-serif);
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+        position: relative;
+        z-index: 1;
+    }
+
+    .luxury-pill-btn:hover {
+        background: var(--color-gold, #c6a87c);
+        color: #000;
+        box-shadow: 0 0 40px rgba(198, 168, 124, 0.3);
+        text-decoration: none;
+    }
+</style>
+
+<footer class="lux-footer">
+    <div class="footer-bg-line"></div>
+    <div class="footer-container">
+        <!-- Brand Area -->
+        <div class="footer-left">
+            <div class="footer-brand-wrap">
+                <span class="footer-logo">Les Jasmins</span>
+                <p class="footer-tagline">
+                    L'excellence en dermatologie esthétique au sein du Kantaoui Medical Center. Une vision architecturale de la beauté.
+                </p>
+                <div class="footer-signature">Dir. Dr A. Mellouli Laroussi</div>
+            </div>
+        </div>
+
+        <!-- Links & Info Grid -->
+        <div class="footer-right">
+            <!-- Nav -->
+            <div>
+                <h4 class="footer-col-title">Navigation</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="/#hero">Radiance</a></li>
+                    <li><a href="/Home/About">Le Centre</a></li>
+                    <li><a href="/#traitements">Collection</a></li>
+                    <li><a href="/Home/Results">Résultats</a></li>
+                    <li><a href="/#expertise">Expertise</a></li>
+                    <li><a asp-controller="Home" asp-action="Article">Journal</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact/Info -->
+            <div>
+                <h4 class="footer-col-title">Information</h4>
+                <div class="footer-info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <span class="footer-info-label">Lieu</span>
+                        <p class="footer-info-value">Kantaoui Medical Center, Bloc A, 5ème Étage<br>Hammam Sousse, Sousse, Tunisie</p>
+                    </div>
+                </div>
+                <div class="footer-info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <span class="footer-info-label">Contact</span>
+                        <p class="footer-info-value">+216 20 402 049<br>ash.laroussi@yahoo.fr</p>
+                    </div>
+                </div>
+                <div class="footer-info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <span class="footer-info-label">Horaires</span>
+                        <p class="footer-info-value">Lun — Ven : 09:00 - 18:00<br>Sam : 09:00 - 13:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+        <div class="footer-social-links">
+            <a href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                INSTAGRAM
+            </a>
+            <a href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                FACEBOOK
+            </a>
+            <a href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LINKEDIN
+            </a>
+        </div>
+        <span>© 2026 CENTRE LES JASMINS — TOUS DROITS RÉSERVÉS</span>
+        <span style="opacity: 0.5;">DESIGN PAR RADIANCE EDITORIAL</span>
+    </div>
+</footer>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+        });
+    </script>
+}
