@@ -249,7 +249,7 @@
                             </div>
                             <div class="transformation-info">
                                 <div class="info-header">
-                                    <span class="info-case">ID DU CAS : #@res.Id.ToString("D4")</span>
+                                    <span class="info-case">ID DU CAS : @(string.IsNullOrEmpty(res.CaseNumber) ? $"#{res.Id.ToString("D4")}" : res.CaseNumber)</span>
                                     <span class="info-protocol">@res.ProtocolName</span>
                                 </div>
                                 <h3 class="info-title">@res.Title</h3>
@@ -259,73 +259,6 @@
                         delay += 0.15;
                     }
                 }
-
-                <!-- Showcase Clinical Cards with Real AI Face & Hair Before/After Photos -->
-                <article class="transformation-card reveal-on-scroll" style="transition-delay: 0.3s;">
-                    <div class="transformation-visual">
-                        <div class="image-pair">
-                            <div class="img-before" style="background-image: url('/images/before_face_1.png');">
-                                <span class="img-label">AVANT</span>
-                            </div>
-                            <div class="img-after" style="background-image: url('/images/after_face_1.png');">
-                                <span class="img-label">APRÈS</span>
-                            </div>
-                        </div>
-                        <div class="transformation-scan-line"></div>
-                    </div>
-                    <div class="transformation-info">
-                        <div class="info-header">
-                            <span class="info-case">ID DU CAS : #0821</span>
-                            <span class="info-protocol">ARCHITECTURE HYALURONIQUE & BOTOX</span>
-                        </div>
-                        <h3 class="info-title">Sculpture Volumétrique & Rajeunissement Facial</h3>
-                        <p class="info-desc">Restauration des volumes de la pommette, lissage des rides du contour des yeux et éclat cutané instantané.</p>
-                    </div>
-                </article>
-
-                <article class="transformation-card reveal-on-scroll" style="transition-delay: 0.45s;">
-                    <div class="transformation-visual">
-                        <div class="image-pair">
-                            <div class="img-before" style="background-image: url('/images/before_laser_2.png');">
-                                <span class="img-label">AVANT</span>
-                            </div>
-                            <div class="img-after" style="background-image: url('/images/after_laser_2.png');">
-                                <span class="img-label">APRÈS</span>
-                            </div>
-                        </div>
-                        <div class="transformation-scan-line"></div>
-                    </div>
-                    <div class="transformation-info">
-                        <div class="info-header">
-                            <span class="info-case">ID DU CAS : #1042</span>
-                            <span class="info-protocol">LASER CO2 FRACTIONNÉ</span>
-                        </div>
-                        <h3 class="info-title">Resurfacing Cutané & Élimination des Taches</h3>
-                        <p class="info-desc">Lissage des micro-reliefs cutanés, réduction des pores dilatés et unification parfaite du teint.</p>
-                    </div>
-                </article>
-
-                <article class="transformation-card reveal-on-scroll" style="transition-delay: 0.6s;">
-                    <div class="transformation-visual">
-                        <div class="image-pair">
-                            <div class="img-before" style="background-image: url('/images/before_hair_3.png');">
-                                <span class="img-label">AVANT</span>
-                            </div>
-                            <div class="img-after" style="background-image: url('/images/after_hair_3.png');">
-                                <span class="img-label">APRÈS</span>
-                            </div>
-                        </div>
-                        <div class="transformation-scan-line"></div>
-                    </div>
-                    <div class="transformation-info">
-                        <div class="info-header">
-                            <span class="info-case">ID DU CAS : #0915</span>
-                            <span class="info-protocol">PRP & REGENERA ACTIVA CAPILLAIRE</span>
-                        </div>
-                        <h3 class="info-title">Redensification Capillaire & Alopécie</h3>
-                        <p class="info-desc">Stimulation autologue des follicules pileux pour arrêter la chute et régénérer la densité de la chevelure.</p>
-                    </div>
-                </article>
             </div>
 
             <button class="slider-arrow-btn slider-arrow-right" id="labNextBtn" aria-label="Suivant" title="Cas Suivant">

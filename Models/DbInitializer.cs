@@ -173,6 +173,57 @@ namespace DrAshrafMellouli.Models
                 }
             }
 
+            // Prepare initial results
+            var initialResults = new List<Result>
+            {
+                new Result
+                {
+                    CaseNumber = "#0821",
+                    Title = "Sculpture Volumétrique & Rajeunissement Facial",
+                    Description = "Restauration des volumes de la pommette, lissage des rides du contour des yeux et éclat cutané instantané.",
+                    Category = Category.Face,
+                    BeforeImageUrl = "/images/before_face_1.png",
+                    AfterImageUrl = "/images/after_face_1.png",
+                    ProtocolName = "ARCHITECTURE HYALURONIQUE & BOTOX",
+                    Sessions = "1 séance",
+                    ResultType = "Immédiat"
+                },
+                new Result
+                {
+                    CaseNumber = "#1042",
+                    Title = "Resurfacing Cutané & Élimination des Taches",
+                    Description = "Lissage des micro-reliefs cutanés, réduction des pores dilatés et unification parfaite du teint.",
+                    Category = Category.Laser,
+                    BeforeImageUrl = "/images/before_laser_2.png",
+                    AfterImageUrl = "/images/after_laser_2.png",
+                    ProtocolName = "LASER CO2 FRACTIONNÉ",
+                    Sessions = "3 séances",
+                    ResultType = "Durable"
+                },
+                new Result
+                {
+                    CaseNumber = "#0915",
+                    Title = "Redensification Capillaire & Alopécie",
+                    Description = "Stimulation autologue des follicules pileux pour arrêter la chute et régénérer la densité de la chevelure.",
+                    Category = Category.Hair,
+                    BeforeImageUrl = "/images/before_hair_3.png",
+                    AfterImageUrl = "/images/after_hair_3.png",
+                    ProtocolName = "PRP & REGENERA ACTIVA CAPILLAIRE",
+                    Sessions = "4 séances",
+                    ResultType = "Regénératif"
+                }
+            };
+
+            foreach (var res in initialResults)
+            {
+                var exists = context.Results.Any(r => r.Title == res.Title);
+                if (!exists)
+                {
+                    context.Results.Add(res);
+                    changesSaved = true;
+                }
+            }
+
             if (changesSaved)
             {
                 context.SaveChanges();
