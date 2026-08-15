@@ -215,7 +215,7 @@
 </section>
 
 <section class="metamorphosis-lab section-padding" id="resultats">
-    <div class="lab-container-full">
+    <div class="lab-container-edge">
         <header class="lab-header reveal-on-scroll">
             <div class="lab-badge">RAPPORTS CLINIQUES</div>
             <h2 class="lab-title">RÉSULTATS <em>MÉDICAUX</em></h2>
@@ -223,8 +223,8 @@
             <div class="lab-divider"></div>
         </header>
 
-        <!-- Full-Width Slider Container with Floating Side Arrows -->
-        <div class="full-slider-wrapper">
+        <!-- Full-Width Edge-to-Edge Slider Container with Floating Side Arrows -->
+        <div class="full-slider-wrapper-edge">
             <button class="slider-arrow-btn slider-arrow-left" id="labPrevBtn" aria-label="Précédent" title="Cas Précédent">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
@@ -481,14 +481,27 @@
 </footer>
 
 <style>
-    .lab-container-full {
+    .metamorphosis-lab {
+        width: 100vw !important;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw !important;
+        margin-right: -50vw !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        overflow: hidden;
+    }
+
+    .lab-container-edge {
         width: 100%;
         max-width: 100%;
-        padding: 0 3vw;
+        padding: 0;
+        margin: 0;
         box-sizing: border-box;
     }
 
-    .full-slider-wrapper {
+    .full-slider-wrapper-edge {
         position: relative;
         width: 100%;
         margin-bottom: 4rem;
@@ -498,46 +511,45 @@
 
     .slider-arrow-btn {
         position: absolute;
-        top: 38%;
-        z-index: 30;
-        width: 56px;
-        height: 56px;
+        top: 35%;
+        z-index: 50;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
-        background: rgba(13, 13, 13, 0.9);
-        border: 1.5px solid var(--color-gold, #c6a87c);
+        background: #0d0d0d;
+        border: 2px solid var(--color-gold, #c6a87c);
         color: var(--color-gold, #c6a87c);
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        backdrop-filter: blur(10px);
         transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
     }
 
     .slider-arrow-left {
-        left: 10px;
+        left: 25px;
     }
 
     .slider-arrow-right {
-        right: 10px;
+        right: 25px;
     }
 
     .slider-arrow-btn:hover {
         background: var(--color-gold, #c6a87c);
         color: #000;
-        box-shadow: 0 0 35px rgba(198, 168, 124, 0.6);
-        transform: scale(1.12);
+        box-shadow: 0 0 40px rgba(198, 168, 124, 0.8);
+        transform: scale(1.15);
     }
 
     .lab-carousel-scroller {
         display: flex;
-        gap: 30px;
+        gap: 0;
         width: 100%;
+        padding: 15px 0 2rem 0;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
-        padding: 15px 0 2rem 0;
         cursor: grab;
         user-select: none;
         -webkit-overflow-scrolling: touch;
@@ -558,28 +570,30 @@
     }
 
     .lab-carousel-scroller .transformation-card {
-        flex: 0 0 calc(50% - 15px);
-        width: calc(50% - 15px);
-        max-width: calc(50% - 15px);
+        flex: 0 0 50vw;
+        width: 50vw;
+        max-width: 50vw;
+        padding: 0 25px;
         box-sizing: border-box;
         scroll-snap-align: start;
     }
 
     @@media (max-width: 900px) {
         .slider-arrow-left {
-            left: 5px;
+            left: 10px;
         }
         .slider-arrow-right {
-            right: 5px;
+            right: 10px;
         }
         .slider-arrow-btn {
-            width: 44px;
-            height: 44px;
+            width: 46px;
+            height: 46px;
         }
         .lab-carousel-scroller .transformation-card {
-            flex: 0 0 100%;
-            width: 100%;
-            max-width: 100%;
+            flex: 0 0 100vw;
+            width: 100vw;
+            max-width: 100vw;
+            padding: 0 15px;
         }
     }
 </style>
@@ -628,7 +642,7 @@
         if (scroller) {
             const getScrollAmount = () => {
                 const card = scroller.querySelector('.transformation-card');
-                return card ? (card.offsetWidth + 30) : (scroller.clientWidth / 2);
+                return card ? card.offsetWidth : (scroller.clientWidth / 2);
             };
 
             if (prevBtn) {
