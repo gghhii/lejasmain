@@ -86,10 +86,7 @@
                         <div class="matrix-content">
                             <h3 class="matrix-name">@item.Title</h3>
                             <p class="matrix-desc">@item.Description</p>
-                            @if (!string.IsNullOrEmpty(item.ProtocolDetails))
-                            {
-                                <a href="/Home/Treatment/@item.Id" class="matrix-link">PROTOCOL DETAILS</a>
-                            }
+                            <a href="/Home/Treatment/@item.Id" class="matrix-link">DÉTAILS DU PROTOCOLE →</a>
                         </div>
                     </div>
                     i++;
