@@ -232,8 +232,10 @@
             <div class="lab-carousel-scroller" id="labScroller">
                 @if (Model.Results != null && Model.Results.Any())
                 {
+                    var list = Model.Results.ToList();
+                    var displayList = list.Count < 4 ? list.Concat(list).Concat(list).ToList() : list;
                     double delay = 0;
-                    foreach (var res in Model.Results)
+                    foreach (var res in displayList)
                     {
                         <article class="transformation-card reveal-on-scroll" style="transition-delay: @(delay)s;">
                             <div class="transformation-visual">
@@ -256,7 +258,7 @@
                                 <p class="info-desc">@res.Description</p>
                             </div>
                         </article>
-                        delay += 0.15;
+                        delay = (delay + 0.15) % 0.6;
                     }
                 }
             </div>
@@ -591,17 +593,33 @@
         if (scroller) {
             const getScrollAmount = () => {
                 const card = scroller.querySelector('.transformation-card');
-                return card ? card.offsetWidth : (scroller.clientWidth / 2);
+                return card ? card.offsetWidth : (window.innerWidth / 2);
             };
 
             if (prevBtn) {
-                prevBtn.addEventListener("click", () => {
-                    scroller.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
+                prevBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const amount = getScrollAmount();
+                    if (scroller.scrollLeft <= 10) {
+                        scroller.scrollTo({ left: scroller.scrollWidth, behavior: "smooth" });
+                    } else {
+                        scroller.scrollBy({ left: -amount, behavior: "smooth" });
+                    }
                 });
             }
+
             if (nextBtn) {
-                nextBtn.addEventListener("click", () => {
-                    scroller.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+                nextBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const amount = getScrollAmount();
+                    const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+                    if (scroller.scrollLeft >= maxScroll - 15) {
+                        scroller.scrollTo({ left: 0, behavior: "smooth" });
+                    } else {
+                        scroller.scrollBy({ left: amount, behavior: "smooth" });
+                    }
                 });
             }
 
