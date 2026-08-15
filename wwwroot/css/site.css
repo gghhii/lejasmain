@@ -1784,12 +1784,13 @@ body {
 
 .clinical-title {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 6vw, 5.5rem);
-  line-height: 1;
+  font-size: clamp(1.8rem, 3.8vw, 3.5rem);
+  line-height: 1.15;
   margin-bottom: 2.5rem;
   text-transform: uppercase;
-  overflow-wrap: break-word;
-  word-break: break-word;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
 .clinical-lead {
@@ -7543,11 +7544,12 @@ body {
 
   .math-title,
   .clinical-title {
-    font-size: clamp(2.2rem, 7.5vw, 4.2rem);
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
     color: #fff;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-    overflow-wrap: break-word;
-    word-break: break-word;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
   }
 
   .math-lead,
