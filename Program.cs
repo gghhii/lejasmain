@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -7,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DrAshrafMellouli.Models.AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddSession(options => {
     options.IdleTimeout = TimeSpan.FromMinutes(60);
@@ -24,6 +26,7 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<DrAshrafMellouli.Models.AppDbContext>();
     db.Database.Migrate();
+    DrAshrafMellouli.Models.DataMigrator.MigrateSqliteToPostgres(db, "DrAshrafMellouli.db");
     DrAshrafMellouli.Models.DbInitializer.Seed(db);
 }
 

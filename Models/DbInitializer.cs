@@ -8,8 +8,6 @@ namespace DrAshrafMellouli.Models
     {
         public static void Seed(AppDbContext context)
         {
-            context.Database.EnsureCreated();
-
             // Prepare the list of initial treatments
             var initialTreatments = new List<Treatment>
             {
