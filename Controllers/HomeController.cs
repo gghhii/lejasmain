@@ -20,7 +20,7 @@ public class HomeController : Controller
     {
         var data = new HomeViewModel
         {
-            Results = await _context.Results.OrderByDescending(r => r.Id).Take(2).ToListAsync(),
+            Results = await _context.Results.OrderByDescending(r => r.Id).ToListAsync(),
             Articles = await _context.Articles.OrderByDescending(a => a.DatePublished).Take(3).ToListAsync()
         };
         return View(data);
@@ -70,7 +70,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Results()
     {
-        var results = await _context.Results.ToListAsync();
+        var results = await _context.Results.OrderByDescending(r => r.Id).ToListAsync();
         return View(results);
     }
 
