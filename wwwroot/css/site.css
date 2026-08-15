@@ -2452,6 +2452,50 @@ body {
   }
 }
 
+/* ===== WHITE BACKGROUND FOR TREATMENT GALLERY SECTION ACROSS THE 4 PAGES ===== */
+.treatment-gallery-sculpture {
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+
+.treatment-gallery-sculpture .gallery-title {
+  color: #111111 !important;
+}
+
+.treatment-gallery-sculpture .gallery-title em {
+  color: var(--color-gold) !important;
+}
+
+.treatment-gallery-sculpture .matrix-name {
+  color: #111111 !important;
+}
+
+.treatment-gallery-sculpture .matrix-desc {
+  color: #444444 !important;
+}
+
+.treatment-gallery-sculpture .search-input {
+  background: #f4f4f6 !important;
+  color: #111111 !important;
+  border-color: rgba(198, 168, 124, 0.4) !important;
+}
+
+.treatment-gallery-sculpture .search-input::placeholder {
+  color: #777777 !important;
+}
+
+.treatment-gallery-sculpture .search-icon {
+  color: var(--color-gold) !important;
+}
+
+.treatment-gallery-sculpture .matrix-content {
+  border-left-color: rgba(198, 168, 124, 0.3) !important;
+}
+
+.treatment-gallery-sculpture .no-results-msg {
+  color: #666666 !important;
+}
+
 .treatment-matrix {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
