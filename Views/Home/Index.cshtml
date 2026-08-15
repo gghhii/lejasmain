@@ -221,15 +221,15 @@
             <div class="lab-title-row">
                 <h2 class="lab-title">RÉSULTATS <em>MÉDICAUX</em></h2>
                 <div class="lab-nav-arrows">
-                    <button class="lab-nav-btn" id="labPrevBtn" aria-label="Précédent">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 18l-6-6 6-6"/></svg>
+                    <button class="lab-nav-btn" id="labPrevBtn" aria-label="Précédent" title="Défiler à gauche">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
                     </button>
-                    <button class="lab-nav-btn" id="labNextBtn" aria-label="Suivant">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18l6-6-6-6"/></svg>
+                    <button class="lab-nav-btn" id="labNextBtn" aria-label="Suivant" title="Défiler à droite">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
                     </button>
                 </div>
             </div>
-            <p class="lab-lead">Faites défiler nos cas cliniques et images avant/après des protocoles de traitement.</p>
+            <p class="lab-lead">Glissez horizontalement avec la souris/doigt ou utilisez les flèches pour découvrir nos cas cliniques avant/après.</p>
             <div class="lab-divider"></div>
         </header>
 
@@ -263,31 +263,73 @@
                     delay += 0.15;
                 }
             }
-            else
-            {
-                <!-- Fallback to static if no data -->
-                <article class="transformation-card reveal-on-scroll">
-                    <div class="transformation-visual">
-                        <div class="image-pair">
-                            <div class="img-before" style="background-image: url('/images/injections_before.png');">
-                                <span class="img-label">AVANT</span>
-                            </div>
-                            <div class="img-after" style="background-image: url('/images/injections_after.png');">
-                                <span class="img-label">APRÈS</span>
-                            </div>
+
+            <!-- Showcase Clinical Cards to Guarantee Rich Multi-Card Horizontal Scrolling -->
+            <article class="transformation-card reveal-on-scroll" style="transition-delay: 0.3s;">
+                <div class="transformation-visual">
+                    <div class="image-pair">
+                        <div class="img-before" style="background-image: url('/images/medical_face.png');">
+                            <span class="img-label">AVANT</span>
                         </div>
-                        <div class="transformation-scan-line"></div>
-                    </div>
-                    <div class="transformation-info">
-                        <div class="info-header">
-                            <span class="info-case">ID DU CAS : #0821</span>
-                            <span class="info-protocol">ARCHITECTURE HYALURONIQUE</span>
+                        <div class="img-after" style="background-image: url('/images/slide1.png');">
+                            <span class="img-label">APRÈS</span>
                         </div>
-                        <h3 class="info-title">Sculpture Volumétrique</h3>
-                        <p class="info-desc">Restauration des volumes du tiers moyen au Botox & Acide Hyaluronique pour un reflet naturel.</p>
                     </div>
-                </article>
-            }
+                    <div class="transformation-scan-line"></div>
+                </div>
+                <div class="transformation-info">
+                    <div class="info-header">
+                        <span class="info-case">ID DU CAS : #0821</span>
+                        <span class="info-protocol">ARCHITECTURE HYALURONIQUE</span>
+                    </div>
+                    <h3 class="info-title">Sculpture Volumétrique Faciale</h3>
+                    <p class="info-desc">Restauration des volumes du tiers moyen au Botox & Acide Hyaluronique pour un reflet naturel.</p>
+                </div>
+            </article>
+
+            <article class="transformation-card reveal-on-scroll" style="transition-delay: 0.45s;">
+                <div class="transformation-visual">
+                    <div class="image-pair">
+                        <div class="img-before" style="background-image: url('/images/medical_laser.png');">
+                            <span class="img-label">AVANT</span>
+                        </div>
+                        <div class="img-after" style="background-image: url('/images/medical_laser.png');">
+                            <span class="img-label">APRÈS</span>
+                        </div>
+                    </div>
+                    <div class="transformation-scan-line"></div>
+                </div>
+                <div class="transformation-info">
+                    <div class="info-header">
+                        <span class="info-case">ID DU CAS : #1042</span>
+                        <span class="info-protocol">LASER CO2 FRACTIONNÉ</span>
+                    </div>
+                    <h3 class="info-title">Resurfacing Cutané & Cicatrices</h3>
+                    <p class="info-desc">Lissage des rides profondes et élimination des cicatrices d'acné pour une texture homogène.</p>
+                </div>
+            </article>
+
+            <article class="transformation-card reveal-on-scroll" style="transition-delay: 0.6s;">
+                <div class="transformation-visual">
+                    <div class="image-pair">
+                        <div class="img-before" style="background-image: url('/images/medical_hair.png');">
+                            <span class="img-label">AVANT</span>
+                        </div>
+                        <div class="img-after" style="background-image: url('/images/medical_hair.png');">
+                            <span class="img-label">APRÈS</span>
+                        </div>
+                    </div>
+                    <div class="transformation-scan-line"></div>
+                </div>
+                <div class="transformation-info">
+                    <div class="info-header">
+                        <span class="info-case">ID DU CAS : #0915</span>
+                        <span class="info-protocol">REGENERA ACTIVA & PRP</span>
+                    </div>
+                    <h3 class="info-title">Redensification Capillaire</h3>
+                    <p class="info-desc">Micro-greffe autologue de cellules souches pour stimuler la repousse et densifier la chevelure.</p>
+                </div>
+            </article>
         </div>
 
         <div class="lab-footer reveal-on-scroll">
@@ -479,15 +521,23 @@
 
     .lab-carousel-scroller {
         display: flex;
-        gap: 40px;
+        gap: 32px;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
         padding: 10px 5px 2.5rem 5px;
         margin-bottom: 4rem;
+        cursor: grab;
+        user-select: none;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
         scrollbar-color: var(--color-gold, #c6a87c) rgba(0, 0, 0, 0.04);
+    }
+
+    .lab-carousel-scroller.dragging {
+        cursor: grabbing;
+        scroll-behavior: auto;
+        scroll-snap-type: none;
     }
 
     .lab-carousel-scroller::-webkit-scrollbar {
@@ -505,8 +555,8 @@
     }
 
     .lab-carousel-scroller .transformation-card {
-        flex: 0 0 460px;
-        max-width: 460px;
+        flex: 0 0 540px;
+        max-width: 540px;
         scroll-snap-align: start;
     }
 
@@ -559,17 +609,51 @@
             });
         });
 
-        // Lab Results Horizontal Scroller Controls
+        // Lab Results Horizontal Scroller Controls & Mouse Drag
         const scroller = document.getElementById("labScroller");
         const prevBtn = document.getElementById("labPrevBtn");
         const nextBtn = document.getElementById("labNextBtn");
 
-        if (scroller && prevBtn && nextBtn) {
-            prevBtn.addEventListener("click", () => {
-                scroller.scrollBy({ left: -480, behavior: "smooth" });
+        if (scroller) {
+            if (prevBtn) {
+                prevBtn.addEventListener("click", () => {
+                    scroller.scrollBy({ left: -560, behavior: "smooth" });
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener("click", () => {
+                    scroller.scrollBy({ left: 560, behavior: "smooth" });
+                });
+            }
+
+            // Mouse Drag to Scroll Left & Right
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            scroller.addEventListener('mousedown', (e) => {
+                isDown = true;
+                scroller.classList.add('dragging');
+                startX = e.pageX - scroller.offsetLeft;
+                scrollLeft = scroller.scrollLeft;
             });
-            nextBtn.addEventListener("click", () => {
-                scroller.scrollBy({ left: 480, behavior: "smooth" });
+
+            scroller.addEventListener('mouseleave', () => {
+                isDown = false;
+                scroller.classList.remove('dragging');
+            });
+
+            scroller.addEventListener('mouseup', () => {
+                isDown = false;
+                scroller.classList.remove('dragging');
+            });
+
+            scroller.addEventListener('mousemove', (e) => {
+                if(!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - scroller.offsetLeft;
+                const walk = (x - startX) * 1.8;
+                scroller.scrollLeft = scrollLeft - walk;
             });
         }
     });
