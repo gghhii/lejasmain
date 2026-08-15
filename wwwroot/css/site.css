@@ -242,18 +242,7 @@ body {
 }
 
 .hero-slider-dots {
-  position: absolute;
-  bottom: 5vh;
-  left: 50px;
-  display: flex;
-  gap: 15px;
-  z-index: 10;
-}
-
-@media (max-width: 768px) {
-  .hero-slider-dots {
-    display: none !important;
-  }
+  display: none !important;
 }
 
 .slider-dot {
