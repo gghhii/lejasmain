@@ -249,7 +249,7 @@
                             </div>
                             <div class="transformation-info">
                                 <div class="info-header">
-                                    <span class="info-case">ID DU CAS : @(string.IsNullOrEmpty(res.CaseNumber) ? $"#{res.Id.ToString("D4")}" : res.CaseNumber)</span>
+                                    <span class="info-case">ID DU CAS : #@res.Id.ToString("D4")</span>
                                     <span class="info-protocol">@res.ProtocolName</span>
                                 </div>
                                 <h3 class="info-title">@res.Title</h3>

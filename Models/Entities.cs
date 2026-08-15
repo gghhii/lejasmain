@@ -34,8 +34,7 @@ namespace DrAshrafMellouli.Models
     {
         public int Id { get; set; }
         
-        [Required]
-        public string CaseNumber { get; set; } = string.Empty; // e.g., #H-440
+        public string? CaseNumber { get; set; }
         
         [Required]
         public string Title { get; set; } = string.Empty;
