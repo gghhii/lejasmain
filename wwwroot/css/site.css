@@ -250,6 +250,12 @@ body {
   z-index: 10;
 }
 
+@media (max-width: 768px) {
+  .hero-slider-dots {
+    display: none !important;
+  }
+}
+
 .slider-dot {
   width: 40px;
   height: 2px;
