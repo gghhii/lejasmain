@@ -174,6 +174,7 @@ namespace DrAshrafMellouli.Controllers
             if (!IsAuthenticated()) return RedirectToAction("Login");
             ModelState.Remove("BeforeImageUrl");
             ModelState.Remove("AfterImageUrl");
+            ModelState.Remove("CaseNumber");
 
             if (ModelState.IsValid)
             {
@@ -203,18 +204,29 @@ namespace DrAshrafMellouli.Controllers
             if (id != result.Id) return NotFound();
             ModelState.Remove("BeforeImageUrl");
             ModelState.Remove("AfterImageUrl");
+            ModelState.Remove("CaseNumber");
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var existing = await _context.Results.FindAsync(id);
+                    if (existing == null) return NotFound();
+
+                    existing.Title = result.Title;
+                    existing.Description = result.Description;
+                    existing.Category = result.Category;
+                    existing.ProtocolName = result.ProtocolName;
+                    existing.Sessions = result.Sessions;
+                    existing.ResultType = result.ResultType;
+
                     var newBefore = await SaveUploadedFile(beforeImageFile);
-                    if (newBefore != null) result.BeforeImageUrl = newBefore;
+                    if (newBefore != null) existing.BeforeImageUrl = newBefore;
 
                     var newAfter = await SaveUploadedFile(afterImageFile);
-                    if (newAfter != null) result.AfterImageUrl = newAfter;
+                    if (newAfter != null) existing.AfterImageUrl = newAfter;
 
-                    _context.Update(result);
+                    _context.Update(existing);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

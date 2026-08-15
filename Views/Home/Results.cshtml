@@ -70,7 +70,14 @@
                 int delay = 0;
                 foreach (var item in Model)
                 {
-                    <article class="transformation-card reveal-on-scroll result-item" data-category="@item.Category.ToString().ToLower()" style="transition-delay: @(delay * 0.1)s;">
+                    string catSlug = item.Category switch {
+                        DrAshrafMellouli.Models.Category.Face => "visage",
+                        DrAshrafMellouli.Models.Category.Body => "corps",
+                        DrAshrafMellouli.Models.Category.Hair => "cheveux",
+                        DrAshrafMellouli.Models.Category.Laser => "laser",
+                        _ => "visage"
+                    };
+                    <article class="transformation-card reveal-on-scroll result-item" data-category="@catSlug" style="transition-delay: @(delay * 0.1)s;">
                         <div class="transformation-visual">
                             <div class="image-pair">
                                 <div class="img-before" style="background-image: url('@item.BeforeImageUrl');">
